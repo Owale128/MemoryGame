@@ -12,7 +12,7 @@ const Home = () => {
         e.preventDefault()
         if(inputValue.trim() === '') return alert('Please enter username')
         setInputValue('')
-        navigate('/difficulty')
+        navigate('/')
     }
 
   return (
