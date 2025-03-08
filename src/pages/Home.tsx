@@ -16,7 +16,7 @@ const Home = () => {
     }
 
   return (
-    <div>
+    <div className="flex justify-center items-center place-items-center my-72 ">
       <DisplayHomeForm 
       inputValue={inputValue}
       setInputValue={setInputValue} 
