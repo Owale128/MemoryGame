@@ -1,14 +1,21 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation, useNavigate } from "react-router-dom"
 
 const Layout = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isHomePage = location.pathname === '/'
+
+  const logOut = () => {
+   const isConfirmed = confirm('Are you sure?')
+   if(isConfirmed) navigate('/')
+  }
   return (
     <div>
-        <header className="text-center border border-black p-2 text-xl">
-          <ul>
-            <li>
-              Welcom
-            </li>
-          </ul>
+        <header className="text-center border-b border-black p-1 text-xl">
+          {!isHomePage && (
+            <button onClick={logOut} className="cursor-pointer">Logout</button>
+          )}
+          {isHomePage && <p>Welcome</p>}
         </header>
         <main>
             <Outlet />
