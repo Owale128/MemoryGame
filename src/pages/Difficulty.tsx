@@ -1,17 +1,17 @@
-import { useState } from "react"
+import DisplayDifficulty from "../components/DisplayDifficulty"
+import { useNavigate } from "react-router-dom"
 
 const Difficulty = () => {
-  const [difficulty, setDifficulty] = useState('')
+  const navigate = useNavigate()
 
   const handleDifficulty = (diffi: string) => {
-    setDifficulty(diffi)
+    navigate(`/gamePage?difficulty=${diffi}`)
   }
+
   return (
-    <div>
-      <h1>Choose Difficulty</h1>
-      <button onClick={() => handleDifficulty('easy')}>Easy</button>
-      <button onClick={() => handleDifficulty('medium')}>Medium</button>
-      <button onClick={() => handleDifficulty('hard')}>Hard</button>
+    <div className="flex flex-col items-center my-40">
+      <h1 className="text-3xl mb-14">Choose Difficulty</h1>
+      <DisplayDifficulty handleDifficulty={handleDifficulty} />
     </div>
   )
 }

@@ -11,16 +11,16 @@ const Layout = () => {
   }
   return (
     <div>
-        <header className="text-center border-b border-black p-1 text-xl">
+        <header className="text-center p-1 text-xl">
           {!isHomePage && (
-            <button onClick={logOut} className="cursor-pointer">Logout</button>
+            <button onClick={logOut} className="cursor-pointer border border-black px-1 mt-5 rounded-xl">Logout</button>
           )}
           {isHomePage && <p>Welcome</p>}
         </header>
         <main>
             <Outlet />
         </main>
-        <footer className="absolute bottom-0 border p-1 w-full text-center">
+        <footer className="absolute bottom-0 p-1 w-full text-center">
             All rights reserved. @2024
         </footer>
     </div>
