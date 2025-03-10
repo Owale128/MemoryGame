@@ -5,6 +5,7 @@ import { IGamePage } from "../model/IGamePage";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
+import { getCardCount } from "../utils/getCardCount";
 
 const GamePage = () => {
     const [memory, setMemory] = useState<IGamePage[]>([])
@@ -17,11 +18,11 @@ const GamePage = () => {
     const queryParams = new URLSearchParams(location.search)
     const difficulty = queryParams.get('difficulty')
 
-    console.log('Fetched dataa:', memory)
-
     const offset = 600
-    const limit = 12
+    const limit = getCardCount(difficulty)
     const apiKey = import.meta.env.VITE_MARVEL_API_KEY
+
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,7 +31,6 @@ const GamePage = () => {
                 const memoryCards = response.data.data.results
                 const duplicatedCards = shuffle(duplicateCards(memoryCards))
                 setMemory(duplicatedCards)
-                console.log('Dupliiii',duplicatedCards)
             } catch (error) {
                 console.error('Error fetching data:', error)
             } finally {
