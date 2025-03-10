@@ -20,32 +20,43 @@ const GamePage = () => {
     console.log('Fetched dataa:', memory)
 
     const offset = 600
-    const limit = 10
+    const limit = 12
     const apiKey = import.meta.env.VITE_MARVEL_API_KEY
 
     useEffect(() => {
-        try {
-            const fetchData = async () => {
+        const fetchData = async () => {
+                try {
                 const response = await axios.get(`https://gateway.marvel.com/v1/public/characters?limit=${limit}&offset=${offset}&apikey=${apiKey}`)
-                setMemory(response.data.data.results)
+                const memoryCards = response.data.data.results
+                const duplicatedCards = shuffle(duplicateCards(memoryCards))
+                setMemory(duplicatedCards)
+                console.log('Dupliiii',duplicatedCards)
+            } catch (error) {
+                console.error('Error fetching data:', error)
+            } finally {
+                setLoading(false)
             }
-            fetchData()
-        } catch (error) {
-            console.error('Error fetching data:', error)
-        } finally {
-            setLoading(false)
         }
+        fetchData()
     }, [])
+
+    const shuffle = (array: IGamePage[]) => {
+        return array.sort(() => Math.random() - 0.5)
+    }
+
+    const duplicateCards = (cards: IGamePage[]) => {
+        return [...cards, ...cards]
+    }
 
     const onCardClick = (cardId: string) => {
         handleCardClick(cardId, state, dispatch, memory)
     }
 
-    if(loading) return <h2>Loading...</h2>
+    if(loading) return <h2 className="text-center">Loading...</h2>
 
   return (
     <div className="flex flex-col justify-center items-center text-3xl my-16">
-        <h1>Level of difficulty: {difficulty}</h1>
+        <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
         <DisplayMemoryCards memory={memory} handleCardClick={onCardClick} />
     </div>
   )

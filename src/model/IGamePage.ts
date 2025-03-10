@@ -4,6 +4,5 @@ export interface IGamePage {
     thumbnail: {
         extension: string;
         path: string;
-
     }
 }

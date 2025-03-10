@@ -7,21 +7,20 @@ interface IDisplaymemoryCards {
 
 const DisplayMemoryCards = ({memory, handleCardClick}: IDisplaymemoryCards) => {
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-2">
         {memory.length === 0 ? (
             <p className="mt-10">No Characters Found</p>
         ) : (
-            memory.map((c) =>(
+            memory.map((c, index) =>(
                 <div 
-                key={c.id}
+                key={`${c.id} - ${index}`}
                 onClick={() => handleCardClick(c.id.toString())}
-                className="cursor-pointer"
+                className="cursor-pointer mx-auto"
                 >
-                <h2>{c.name}</h2>
                 <img 
                 src={`${c.thumbnail.path}.${c.thumbnail.extension}`} 
                 alt={c.name}
-                className="w-72"
+                className="w-72 h-72"
                 />
                 </div>
             ))
