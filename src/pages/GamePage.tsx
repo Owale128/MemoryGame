@@ -1,12 +1,18 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IGamePage } from "../model/IGamePage";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
+import { cardReducer } from "../redcer/cardReducer";
+import { handleCardClick } from "../utils/handleCardClick";
 
 const GamePage = () => {
     const [memory, setMemory] = useState<IGamePage[]>([])
     const [loading, setLoading] = useState(true)
+    const [state, dispatch] = useReducer(cardReducer, {
+        flippedCards: [],
+        matchedCards: []
+    })
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search)
     const difficulty = queryParams.get('difficulty')
@@ -14,7 +20,7 @@ const GamePage = () => {
     console.log('Fetched dataa:', memory)
 
     const offset = 600
-    const limit = 100
+    const limit = 10
     const apiKey = import.meta.env.VITE_MARVEL_API_KEY
 
     useEffect(() => {
@@ -31,12 +37,16 @@ const GamePage = () => {
         }
     }, [])
 
+    const onCardClick = (cardId: string) => {
+        handleCardClick(cardId, state, dispatch, memory)
+    }
+
     if(loading) return <h2>Loading...</h2>
 
   return (
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1>Level of difficulty: {difficulty}</h1>
-        <DisplayMemoryCards memory={memory}/>
+        <DisplayMemoryCards memory={memory} handleCardClick={onCardClick} />
     </div>
   )
 }
