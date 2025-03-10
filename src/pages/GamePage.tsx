@@ -13,7 +13,7 @@ const GamePage = () => {
 
     console.log('Fetched dataa:', memory)
 
-    const offset = 500
+    const offset = 600
     const limit = 100
     const apiKey = import.meta.env.VITE_MARVEL_API_KEY
 
