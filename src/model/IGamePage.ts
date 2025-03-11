@@ -1,5 +1,5 @@
 export interface IGamePage {
-    id: number;
+    id: string;
     name: string;
     thumbnail: {
         extension: string;

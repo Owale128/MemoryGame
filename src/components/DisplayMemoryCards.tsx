@@ -14,7 +14,7 @@ const DisplayMemoryCards = ({memory, handleCardClick}: IDisplaymemoryCards) => {
             memory.map((c, index) =>(
                 <div 
                 key={`${c.id} - ${index}`}
-                onClick={() => handleCardClick(c.id.toString())}
+                onClick={() => handleCardClick(c.id)}
                 className="cursor-pointer mx-auto"
                 >
                 <img 
