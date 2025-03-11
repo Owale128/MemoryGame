@@ -55,7 +55,7 @@ const GamePage = () => {
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
         <h2>Attempts: {state.attempts}</h2>
-        <DisplayMemoryCards memory={memory} handleCardClick={onCardClick} />
+        <DisplayMemoryCards memory={memory} handleCardClick={onCardClick} state={state} />
     </div>
   )
 }

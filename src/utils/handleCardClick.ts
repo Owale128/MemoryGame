@@ -10,7 +10,7 @@ export const handleCardClick = (
    
 ) => {
 
-    if(state.flippedCards.length === 2 || state.flippedCards.includes(cardId)) return
+    if(state.matchedCards.includes(cardId) || state.flippedCards.includes(cardId) || state.flippedCards.length === 2 ) return
     dispatch({type: ActionType.flipCard, payload: cardId})
 
     if(state.flippedCards.length === 1) {
@@ -18,11 +18,12 @@ export const handleCardClick = (
         const secondCard = memory.find((card) => card.id === cardId)
 
         if(firstCard && secondCard && firstCard.name === secondCard.name) {
-            dispatch({ type: ActionType.matchedCards, payload: cardId})
+            dispatch({ type: ActionType.matchedCards, payload: firstCard.id})
+            dispatch({ type: ActionType.matchedCards, payload: secondCard.id})
         }
 
         setTimeout(() => {
             dispatch({ type: ActionType.resetFlippedCards})
-        }, 1000);
+        }, 3000);
     }
 }
