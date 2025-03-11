@@ -6,7 +6,8 @@ export const handleCardClick = (
     cardId: string,
     state: IState,
     dispatch: Dispatch<IAction>,
-    memory: IGamePage[]
+    memory: IGamePage[],
+   
 ) => {
 
     if(state.flippedCards.length === 2 || state.flippedCards.includes(cardId)) return
@@ -17,11 +18,11 @@ export const handleCardClick = (
         const secondCard = memory.find((card) => card.id.toString() === cardId)
 
         if(firstCard && secondCard && firstCard.name === secondCard.name) {
-            dispatch({ type: ActionType.matchCards, payload: cardId})
+            dispatch({ type: ActionType.matchedCards, payload: cardId})
         }
 
         setTimeout(() => {
-            dispatch({ type: ActionType.resetFlippedCards, payload:''})
+            dispatch({ type: ActionType.resetFlippedCards})
         }, 1000);
     }
 }

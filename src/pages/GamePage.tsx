@@ -3,16 +3,19 @@ import { useEffect, useReducer, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IGamePage } from "../model/IGamePage";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
-import { cardReducer } from "../redcer/cardReducer";
+import { ActionType, cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
 import { getCardCount } from "../utils/getCardCount";
+import { shuffle } from "../utils/shuffle";
+import { duplicateCards } from "../utils/duplicateCards";
 
 const GamePage = () => {
     const [memory, setMemory] = useState<IGamePage[]>([])
     const [loading, setLoading] = useState(true)
     const [state, dispatch] = useReducer(cardReducer, {
         flippedCards: [],
-        matchedCards: []
+        matchedCards: [],
+        attempts: 0
     })
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search)
@@ -21,8 +24,6 @@ const GamePage = () => {
     const offset = 600
     const limit = getCardCount(difficulty)
     const apiKey = import.meta.env.VITE_MARVEL_API_KEY
-
-    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,16 +41,12 @@ const GamePage = () => {
         fetchData()
     }, [])
 
-    const shuffle = (array: IGamePage[]) => {
-        return array.sort(() => Math.random() - 0.5)
-    }
-
-    const duplicateCards = (cards: IGamePage[]) => {
-        return [...cards, ...cards]
-    }
-
     const onCardClick = (cardId: string) => {
-        handleCardClick(cardId, state, dispatch, memory)
+        if(state.flippedCards.length === 1){
+            dispatch({type: ActionType.incrementAttempts})
+        }
+
+        handleCardClick(cardId, state, dispatch, memory, )
     }
 
     if(loading) return <h2 className="text-center">Loading...</h2>
@@ -57,6 +54,7 @@ const GamePage = () => {
   return (
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
+        <h2>Attempts: {state.attempts}</h2>
         <DisplayMemoryCards memory={memory} handleCardClick={onCardClick} />
     </div>
   )
