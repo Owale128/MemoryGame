@@ -1,5 +1,6 @@
 import { IGamePage } from "../model/IGamePage"
 
 export const shuffle = (array: IGamePage[]) => {
-    return array.sort(() => Math.random() - 0.5)
+    const shuffleArray = [...array]
+    return shuffleArray.sort(() => Math.random() - 0.5)
 }
