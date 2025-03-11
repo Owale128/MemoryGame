@@ -24,6 +24,6 @@ export const handleCardClick = (
 
         setTimeout(() => {
             dispatch({ type: ActionType.resetFlippedCards})
-        }, 3000);
+        }, 2500);
     }
 }

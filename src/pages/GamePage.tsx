@@ -12,6 +12,7 @@ import { duplicateCards } from "../utils/duplicateCards";
 const GamePage = () => {
     const [memory, setMemory] = useState<IGamePage[]>([])
     const [loading, setLoading] = useState(true)
+
     const [state, dispatch] = useReducer(cardReducer, {
         flippedCards: [],
         matchedCards: [],
@@ -20,11 +21,9 @@ const GamePage = () => {
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search)
     const difficulty = queryParams.get('difficulty')
-
     const offset = 600
     const limit = getCardCount(difficulty)
     const apiKey = import.meta.env.VITE_MARVEL_API_KEY
-
     useEffect(() => {
         const fetchData = async () => {
                 try {
@@ -48,8 +47,8 @@ const GamePage = () => {
 
         handleCardClick(cardId, state, dispatch, memory, )
     }
-
-    if(loading) return <h2 className="text-center">Loading...</h2>
+    
+    if(loading) return <h2 className="text-center text-3xl">Loading...</h2>
 
   return (
     <div className="flex flex-col justify-center items-center text-3xl my-16">

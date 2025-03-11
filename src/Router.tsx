@@ -3,6 +3,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Difficulty from "./pages/Difficulty";
 import GamePage from "./pages/GamePage";
+import ScorePage from "./pages/ScorePage";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
         {
             path: '/gamePage',
             element: <GamePage />
+        },
+        {
+            path: '/scorePage',
+            element: <ScorePage />
         }
        ]
     }
