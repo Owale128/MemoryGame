@@ -5,21 +5,22 @@ import DisplayHomeForm from "../components/DisplayHomeForm"
 
 
 const Home = () => {
-    const [inputValue, setInputValue] = useState('')
+    const [username, setUsername] = useState('')
     const navigate = useNavigate()
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
-        if(inputValue.trim() === '') return alert('Please enter username')
-        setInputValue('')
+        sessionStorage.setItem('username', username)
+        if(username.trim() === '') return alert('Please enter username')
+        setUsername('')
         navigate('/difficulty')
     }
 
   return (
     <div className="flex justify-center items-center place-items-center my-72 ">
       <DisplayHomeForm 
-      inputValue={inputValue}
-      setInputValue={setInputValue} 
+      username={username}
+      setUsername={setUsername} 
       handleSubmit={handleSubmit} />
     </div>
   )

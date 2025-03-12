@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IGamePage } from "../model/IGamePage";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
@@ -12,7 +12,6 @@ import { duplicateCards } from "../utils/duplicateCards";
 const GamePage = () => {
     const [memory, setMemory] = useState<IGamePage[]>([])
     const [loading, setLoading] = useState(true)
-
     const [state, dispatch] = useReducer(cardReducer, {
         flippedCards: [],
         matchedCards: [],
@@ -24,6 +23,9 @@ const GamePage = () => {
     const offset = 600
     const limit = getCardCount(difficulty)
     const apiKey = import.meta.env.VITE_MARVEL_API_KEY
+
+    const navigate = useNavigate()
+
     useEffect(() => {
         const fetchData = async () => {
                 try {
@@ -46,6 +48,10 @@ const GamePage = () => {
         }
 
         handleCardClick(cardId, state, dispatch, memory, )
+
+        if(state.matchedCards.length === memory.length - 1) {
+            navigate('/scorePage', {state: {attempts: state.attempts}})
+        }
     }
     
     if(loading) return <h2 className="text-center text-3xl">Loading...</h2>

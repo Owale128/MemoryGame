@@ -9,6 +9,7 @@ const Layout = () => {
 
   const logOut = () => {
    const isConfirmed = confirm('Are you sure?')
+   sessionStorage.removeItem('username')
    if(isConfirmed) navigate('/')
   }
 
