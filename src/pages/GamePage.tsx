@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
@@ -16,9 +16,8 @@ const GamePage = () => {
         loading: true,
         memory: []
     })
-    const location = useLocation()
-    const queryParams = new URLSearchParams(location.search)
-    const difficulty = queryParams.get('difficulty')
+ 
+    const difficulty = sessionStorage.getItem('difficulty')
     const offset = 600
     const limit = getCardCount(difficulty)
 

@@ -12,6 +12,6 @@ export const getCardCount = (difficulty: string | null) => {
                     return 8
 
                 default: 
-                    return 8
+                    return 6
     }
 }

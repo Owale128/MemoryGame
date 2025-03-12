@@ -5,7 +5,9 @@ const Difficulty = () => {
   const navigate = useNavigate()
 
   const handleDifficulty = (diffi: string) => {
-    navigate(`/gamePage?difficulty=${diffi}`)
+    sessionStorage.setItem('difficulty', diffi)
+    navigate('/gamePage')
+
   }
 
   return (
