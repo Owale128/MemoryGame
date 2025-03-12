@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom"
+import QuitBtn from "../components/QuitBtn"
 
 const ScorePage = () => {
   const location = useLocation()
@@ -10,17 +11,33 @@ const ScorePage = () => {
     const savedDifficulty = sessionStorage.getItem('difficulty')
     navigate('/gamePage', {state: {difficulty: savedDifficulty}})
   }
+
+  const changeDifficulty = () => {
+    navigate('/difficulty')
+  }
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl mt-10">Score page</h1>
       <h2 className="text-3xl mt-8">{storedUsername}</h2>
       <h2 className="text-3xl mt-8">Attempts: {attempts}</h2>
+
       <div className="mt-20">
       <button 
-      className="border rounded-xl px-1 text-2xl cursor-pointer mr-10"
+      className="border rounded-xl px-1 text-2xl cursor-pointer"
       onClick={retryGame}
-      >Retry</button>
-      <button className="border rounded-xl px-2.5 text-2xl cursor-pointer">Quit</button>
+      >
+        Retry
+      </button>
+
+      <button 
+      className="border rounded-xl px-1 text-2xl cursor-pointer mx-10"
+      onClick={changeDifficulty}
+      >
+        Change difficulty
+      </button>
+
+      <QuitBtn />
       </div>
     </div>
   )
