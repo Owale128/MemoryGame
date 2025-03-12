@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useReducer } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
@@ -7,6 +6,7 @@ import { handleCardClick } from "../utils/handleCardClick";
 import { getCardCount } from "../utils/getCardCount";
 import { shuffle } from "../utils/shuffle";
 import { duplicateCards } from "../utils/duplicateCards";
+import { getCards } from "../services/cardService";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -21,15 +21,13 @@ const GamePage = () => {
     const difficulty = queryParams.get('difficulty')
     const offset = 600
     const limit = getCardCount(difficulty)
-    const apiKey = import.meta.env.VITE_MARVEL_API_KEY
 
     const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
                 try {
-                const response = await axios.get(`https://gateway.marvel.com/v1/public/characters?limit=${limit}&offset=${offset}&apikey=${apiKey}`)
-                const memoryCards = response.data.data.results
+                const memoryCards = await getCards(limit, offset)
                 const duplicatedCards = shuffle(duplicateCards(memoryCards))
                 dispatch({type: ActionType.setMemory, payload: duplicatedCards})
             } catch (error) {
@@ -48,7 +46,7 @@ const GamePage = () => {
 
         handleCardClick(cardId, state, dispatch, state.memory, )
 
-        if(state.matchedCards.length === state.memory.length - 1) {
+        if(state.matchedCards.length === state.memory.length) {
             navigate('/scorePage', {state: {attempts: state.attempts}})
         }
     }
@@ -58,7 +56,7 @@ const GamePage = () => {
   return (
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
-        <h2>Attempts: {state.attempts}</h2>
+        <h2 className="mb-16">Attempts: {state.attempts}</h2>
         <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
     </div>
   )
