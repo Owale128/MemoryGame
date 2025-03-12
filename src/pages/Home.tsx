@@ -3,7 +3,6 @@ import { FormEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import DisplayHomeForm from "../components/DisplayHomeForm"
 
-
 const Home = () => {
     const [username, setUsername] = useState('')
     const navigate = useNavigate()

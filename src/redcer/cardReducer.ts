@@ -1,12 +1,5 @@
 import { IGamePage } from "../model/IGamePage";
-
-export interface IState {
-    flippedCards: string[];
-    matchedCards: string[];
-    attempts: number;
-    loading: boolean;
-    memory: IGamePage[]
-}
+import { IState } from "../model/IState";
 
 export interface IAction {
     type: ActionType;
