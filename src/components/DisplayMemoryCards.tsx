@@ -1,4 +1,4 @@
-import { IState } from "../redcer/cardReducer"
+import { IState } from "../model/IState"
 
 interface IDisplaymemoryCards {
     state: IState
