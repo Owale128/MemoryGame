@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
@@ -7,6 +7,8 @@ import { getCardCount } from "../utils/getCardCount";
 import { shuffle } from "../utils/shuffle";
 import { duplicateCards } from "../utils/duplicateCards";
 import { getCards } from "../services/cardService";
+import axios from "axios";
+import DisplayModal from "../components/DisplayModal";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -16,8 +18,9 @@ const GamePage = () => {
         loading: true,
         memory: []
     })
- 
-    const difficulty = sessionStorage.getItem('difficulty')
+    const [showModal, setShowModal] = useState(false)
+    const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
+    const storedUsername = sessionStorage.getItem('username') || 'Unknown'
     const offset = 600
     const limit = getCardCount(difficulty)
     const navigate = useNavigate()
@@ -37,6 +40,15 @@ const GamePage = () => {
         fetchData()
     }, [])
 
+    const sendScoreToBackend = async (username: string, attempts: number, difficulty: string) => {
+      try {
+          await axios.post('http://localhost:3000/saveScore', {username, attempts, difficulty})
+          console.log('Score sent to backend successfully')
+      } catch (error) {
+          console.error('Error sending score to backend')
+      }
+    }
+
     const onCardClick = (cardId: string) => {
         if(state.flippedCards.length === 1){
             dispatch({type: ActionType.incrementAttempts})
@@ -45,17 +57,37 @@ const GamePage = () => {
         handleCardClick(cardId, state, dispatch, state.memory, )
 
         if(state.matchedCards.length === state.memory.length) {
-            navigate('/scorePage', {state: {attempts: state.attempts}})
+            setShowModal(true)
+            sendScoreToBackend(storedUsername, state.attempts, difficulty,)
         }
     }
     
+    const retryGame = () => {
+        setShowModal(false)
+        navigate('/gamePage', {state: {difficulty: difficulty}})
+        dispatch({ type: ActionType.resetMatchedCards})
+      }
+    
+      const changeDifficulty = () => {
+        setShowModal(false)
+        navigate('/difficulty')
+      }
+
+
     if(state.loading) return <h2 className="text-center text-3xl">Loading...</h2>
 
   return (
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
         <h2 className="mb-16">Attempts: {state.attempts}</h2>
-        <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
+
+        {showModal && (
+        <DisplayModal retryGame={retryGame} changeDifficulty={changeDifficulty} storedUsername={storedUsername} />
+        )}
+
+        {!showModal && (
+            <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
+        )}
     </div>
   )
 }
