@@ -1,12 +1,26 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import DisplayScore from "../components/DisplayScore"
+import { useEffect } from "react"
+import axios from "axios"
 
 const ScorePage = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { attempts } = location.state || {}
-  const storedUsername = sessionStorage.getItem('username')
-  const savedDifficulty = sessionStorage.getItem('difficulty')
+  const storedUsername = sessionStorage.getItem('username') || 'unKnown'
+  const savedDifficulty = sessionStorage.getItem('difficulty') || 'medium'
+
+  useEffect(() => {
+    const sendScoreToBackend = async (username: string, attempts: number, difficulty: string) => {
+        try {
+            await axios.post('http://localhost:3000/saveScore', {username, attempts, difficulty})
+            console.log('Score sent to backend successfully')
+        } catch (error) {
+            console.error('Error sending score to backend')
+        }
+    }
+    sendScoreToBackend(storedUsername, attempts, savedDifficulty)
+  }, [])
 
   const retryGame = () => {
     navigate('/gamePage', {state: {difficulty: savedDifficulty}})

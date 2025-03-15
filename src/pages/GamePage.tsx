@@ -20,7 +20,6 @@ const GamePage = () => {
     const difficulty = sessionStorage.getItem('difficulty')
     const offset = 600
     const limit = getCardCount(difficulty)
-
     const navigate = useNavigate()
 
     useEffect(() => {
