@@ -11,7 +11,7 @@ const Difficulty = () => {
   }
 
   return (
-    <div className="flex flex-col items-center my-40">
+    <div className="flex flex-col items-center my-48">
       <h1 className="text-3xl mb-14">Choose Difficulty</h1>
       <DisplayDifficulty handleDifficulty={handleDifficulty} />
     </div>

@@ -1,4 +1,5 @@
 import { IState } from "../model/IState"
+import { motion } from "framer-motion"
 
 interface IDisplaymemoryCards {
     state: IState
@@ -12,11 +13,13 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
             <p className="mt-10">No Characters Found</p>
         ) : (
             state.memory.map((c, index) => (
-                <div 
+                <motion.div 
                     key={`${c.id} - ${index}`}
                     onClick={() => handleCardClick(c.id)}
-                    className={`cursor-pointer mx-auto w-48 h-48 rounded-lg shadow-lg flex items-center justify-center 
-                    ${state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? 'bg-transparent' : 'bg-gray-300'}`}
+                    className='cursor-pointer mx-auto w-48 h-48 rounded-lg shadow-lg flex items-center justify-center bg-gray-300 opacity-100'
+                    initial={{rotateY: 0}}
+                    animate={{rotateY: state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? 180 : 0}}
+                    transition={{ duration: 0.5 }}
                 >
                     {state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? (
                         <img 
@@ -27,7 +30,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                     ) : (
                         <span className="text-white text-3xl font-bold">?</span>
                     )}
-                </div>
+                </motion.div>
             ))
         )}
     </div>
