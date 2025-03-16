@@ -20,6 +20,7 @@ const GamePage = () => {
     })
     const [showModal, setShowModal] = useState(false)
     const [gameStarted, setGameStarted] = useState(false)
+    const [isGameFinished, setIsGameFinished] = useState(false)
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
     const offset = 600
@@ -64,13 +65,15 @@ const GamePage = () => {
             if(gameStarted && finishedGame) {
                 setTimeout(() => {
                     setShowModal(true)
-                    sendScoreToBackend(storedUsername, state.attempts, difficulty,)
+                    sendScoreToBackend(storedUsername, state.attempts, difficulty)
+                    setIsGameFinished(true)
                 }, 1600);
             }
         }, [gameStarted, finishedGame])
     
     const retryGame = () => {
         setShowModal(false)
+        setIsGameFinished(false)
         navigate('/gamePage', {state: {difficulty: difficulty}})
         dispatch({ type: ActionType.resetMatchedCards})
       }
@@ -80,21 +83,35 @@ const GamePage = () => {
         navigate('/difficulty')
       }
 
+      const backBtn = () => {
+        navigate('/difficulty')
+      }
+
 
     if(state.loading) return <h2 className="text-center text-3xl">Loading...</h2>
 
   return (
+    <div className="text-center pt-20">
+    {!isGameFinished && (
+        <button onClick={backBtn} 
+        className="border border-black px-1 text-2xl rounded-xl bg-blue-600 text-white hover:bg-blue-800 ease-in duration-100 cursor-pointer"
+        >
+            Back
+        </button>
+    )}
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
         <h2 className="mb-16">Attempts: {state.attempts}</h2>
 
+
         {showModal && (
-        <DisplayModal retryGame={retryGame} changeDifficulty={changeDifficulty} storedUsername={storedUsername} />
+            <DisplayModal retryGame={retryGame} changeDifficulty={changeDifficulty} storedUsername={storedUsername} />
         )}
 
         {!showModal && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
         )}
+    </div>
     </div>
   )
 }

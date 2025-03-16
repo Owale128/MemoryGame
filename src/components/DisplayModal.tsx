@@ -23,17 +23,17 @@ const DisplayModal = ({retryGame, changeDifficulty, storedUsername}: IDisplayMod
         exit={{ scale: 0 }}
         transition={{ duration: 0.5 }}
     >
-        <h2 className="text-3xl mb-4">Congratulations {storedUsername}</h2>
-        <p className="text-2xl mb-40">You finished the game!</p>
+        <h2 className="text-3xl mb-4 mt-8">Congratulations {storedUsername}</h2>
+        <p className="text-2xl mb-32">You finished the game!</p>
 
         <button 
-        className="border rounded-xl px-1 text-2xl bg-green-500 cursor-pointer"
+        className="border rounded-xl px-1 text-3xl bg-green-500  hover:bg-white ease-in duration-150 cursor-pointer"
         onClick={retryGame}
         >
             Retry
         </button>
         <button 
-        className="border rounded-xl px-1 text-2xl mx-10 bg-amber-300 cursor-pointer"
+        className="border rounded-xl px-1 text-3xl mx-10 bg-amber-300 hover:bg-white ease-in duration-150 cursor-pointer"
         onClick={changeDifficulty}
         >
         Change difficulty
