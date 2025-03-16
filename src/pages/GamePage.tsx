@@ -87,11 +87,11 @@ const GamePage = () => {
         navigate('/difficulty')
       }
 
-
-    if(state.loading) return <h2 className="text-center text-3xl">Loading...</h2>
+    if(state.loading) return <h2 className="text-center text-4xl my-72 ">Loading...</h2>
 
   return (
     <div className="text-center pt-20">
+
     {!isGameFinished && (
         <button onClick={backBtn} 
         className="border border-black px-1 text-2xl rounded-xl bg-blue-600 text-white hover:bg-blue-800 ease-in duration-100 cursor-pointer"
@@ -99,10 +99,10 @@ const GamePage = () => {
             Back
         </button>
     )}
+
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
         <h2 className="mb-16">Attempts: {state.attempts}</h2>
-
 
         {showModal && (
             <DisplayModal retryGame={retryGame} changeDifficulty={changeDifficulty} storedUsername={storedUsername} />
