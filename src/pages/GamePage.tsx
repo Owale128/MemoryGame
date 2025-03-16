@@ -19,6 +19,7 @@ const GamePage = () => {
         memory: []
     })
     const [showModal, setShowModal] = useState(false)
+    const [gameStarted, setGameStarted] = useState(false)
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
     const offset = 600
@@ -31,6 +32,7 @@ const GamePage = () => {
                 const memoryCards = await getCards(limit, offset)
                 const duplicatedCards = shuffle(duplicateCards(memoryCards))
                 dispatch({type: ActionType.setMemory, payload: duplicatedCards})
+                setGameStarted(true)
             } catch (error) {
                 console.error('Error fetching data:', error)
             } finally {
@@ -55,12 +57,17 @@ const GamePage = () => {
         }
 
         handleCardClick(cardId, state, dispatch, state.memory, )
-
-        if(state.matchedCards.length === state.memory.length) {
-            setShowModal(true)
-            sendScoreToBackend(storedUsername, state.attempts, difficulty,)
-        }
     }
+        const finishedGame = state.matchedCards.length === state.memory.length
+
+        useEffect(() => {
+            if(gameStarted && finishedGame) {
+                setTimeout(() => {
+                    setShowModal(true)
+                    sendScoreToBackend(storedUsername, state.attempts, difficulty,)
+                }, 1600);
+            }
+        }, [gameStarted, finishedGame])
     
     const retryGame = () => {
         setShowModal(false)

@@ -9,9 +9,8 @@ interface IDisplayModal {
 
 const DisplayModal = ({retryGame, changeDifficulty, storedUsername}: IDisplayModal) => {
   return (
-    <>
     <motion.div
-        className="modal-overlay"
+        className="modal-overlay mt-14"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -25,16 +24,16 @@ const DisplayModal = ({retryGame, changeDifficulty, storedUsername}: IDisplayMod
         transition={{ duration: 0.5 }}
     >
         <h2 className="text-3xl mb-4">Congratulations {storedUsername}</h2>
-        <p className="text-2xl mb-4">You finished the game!</p>
+        <p className="text-2xl mb-40">You finished the game!</p>
 
         <button 
-        className="border rounded-xl px-1 text-2xl cursor-pointer"
+        className="border rounded-xl px-1 text-2xl bg-green-500 cursor-pointer"
         onClick={retryGame}
         >
             Retry
         </button>
         <button 
-        className="border rounded-xl px-1 text-2xl cursor-pointer mx-10"
+        className="border rounded-xl px-1 text-2xl mx-10 bg-amber-300 cursor-pointer"
         onClick={changeDifficulty}
         >
         Change difficulty
@@ -44,7 +43,6 @@ const DisplayModal = ({retryGame, changeDifficulty, storedUsername}: IDisplayMod
     </motion.div>
     </motion.div>
       
-    </>
   )
 }
 

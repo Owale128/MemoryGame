@@ -13,7 +13,7 @@ const quit = () => {
   return (
     <button
     onClick={quit}
-    className="border rounded-xl px-1 text-2xl cursor-pointer"
+    className="border rounded-xl px-1 text-2xl text-white bg-black cursor-pointer"
     >
       Quit
     </button>
