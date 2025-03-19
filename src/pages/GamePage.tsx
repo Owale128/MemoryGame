@@ -4,11 +4,9 @@ import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
 import { getCardCount } from "../utils/getCardCount";
-import { shuffle } from "../utils/shuffle";
-import { duplicateCards } from "../utils/duplicateCards";
-import { getCards } from "../services/cardService";
 import axios from "axios";
 import DisplayModal from "../components/DisplayModal";
+import { fetchAndShuffleCards } from "../utils/gameUtils";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -29,51 +27,40 @@ const GamePage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-                try {
-                const memoryCards = await getCards(limit, offset)
-                const duplicatedCards = shuffle(duplicateCards(memoryCards))
-                dispatch({type: ActionType.setMemory, payload: duplicatedCards})
-                setGameStarted(true)
-            } catch (error) {
-                console.error('Error fetching data:', error)
-            } finally {
-                dispatch({type: ActionType.setLoading, payload: false })
-            }
+            fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
         }
         fetchData()
     }, [])
-
-    const sendScoreToBackend = async (username: string, attempts: number, difficulty: string) => {
-      try {
-          await axios.post('http://localhost:3000/saveScore', {username, attempts, difficulty})
-          console.log('Score sent to backend successfully')
-      } catch (error) {
-          console.error('Error sending score to backend')
-      }
-    }
 
     const onCardClick = (cardId: string) => {
         if(state.flippedCards.length === 1){
             dispatch({type: ActionType.incrementAttempts})
         }
-
+        
         handleCardClick(cardId, state, dispatch, state.memory, )
     }
-        const finishedGame = state.matchedCards.length === state.memory.length
-
-        useEffect(() => {
-            if(gameStarted && finishedGame) {
-                setTimeout(() => {
-                    setShowModal(true)
-                    sendScoreToBackend(storedUsername, state.attempts, difficulty)
-                    setIsGameFinished(true)
-                }, 1600);
-            }
-        }, [gameStarted, finishedGame])
     
+    const finishedGame = state.matchedCards.length === state.memory.length
+
+    useEffect(() => {
+        if(gameStarted && finishedGame) {
+            setTimeout(async () => {
+                setShowModal(true)
+                    try {
+                        await axios.put('http://localhost:3000/saveScore', {username: storedUsername, attempts: state.attempts, difficulty})
+                        console.log('Score sent to backend successfully')
+                    } catch (error) {
+                        console.error('Error sending score to backend')
+                    }
+                setIsGameFinished(true)
+            }, 1600);
+        }
+    }, [gameStarted, finishedGame])
+
     const retryGame = () => {
         setShowModal(false)
         setIsGameFinished(false)
+        fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
         navigate('/gamePage', {state: {difficulty: difficulty}})
         dispatch({ type: ActionType.resetMatchedCards})
       }
