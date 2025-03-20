@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
@@ -8,6 +8,7 @@ import axios from "axios";
 import DisplayModal from "../components/DisplayModal";
 import { fetchAndShuffleCards } from "../utils/gameUtils";
 import Spinner from "../components/Spinner";
+import { ThemeContext } from "../context/ThemeContext";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -25,6 +26,7 @@ const GamePage = () => {
     const offset = 600
     const limit = getCardCount(difficulty)
     const navigate = useNavigate()
+    const theme = useContext(ThemeContext)
 
     useEffect(() => {
         const fetchData = async () => {     
@@ -89,8 +91,8 @@ const GamePage = () => {
         </button>
     )}
     <div className="flex flex-col justify-center items-center text-3xl my-16">
-        <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
-        <h2 className="mb-16">Attempts: {state.attempts}</h2>
+        <h1 className="mb-10 ease-in duration-100" style={{color: theme.color}}>Level of difficulty: {difficulty}</h1>
+        <h2 className="mb-16 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h2>
         {showModal && (
             <DisplayModal retryGame={retryGame} changeDifficulty={changeDifficulty} storedUsername={storedUsername} />
         )}
