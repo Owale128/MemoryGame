@@ -7,6 +7,7 @@ import { getCardCount } from "../utils/getCardCount";
 import axios from "axios";
 import DisplayModal from "../components/DisplayModal";
 import { fetchAndShuffleCards } from "../utils/gameUtils";
+import Spinner from "../components/Spinner";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -63,7 +64,7 @@ const GamePage = () => {
         setTimeout(() => {   
             fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
             dispatch({ type: ActionType.resetMatchedCards})
-        }, 1500);
+        }, 1200);
         navigate('/gamePage', {state: {difficulty: difficulty}})
       }
     
@@ -76,7 +77,7 @@ const GamePage = () => {
         navigate('/difficulty')
       }
 
-    if(state.loading) return <h2 className="text-center text-4xl my-72 ">Loading...</h2>
+    if(state.loading) return <Spinner />
 
   return (
     <div className="text-center pt-20">

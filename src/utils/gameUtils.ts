@@ -19,6 +19,6 @@ export const fetchAndShuffleCards = async (
         } finally {
             setTimeout(() => {
                 dispatch({type: ActionType.setLoading, payload: false })
-            }, 1500);
+            }, 1600);
         }
     }
