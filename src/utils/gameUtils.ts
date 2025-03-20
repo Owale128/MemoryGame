@@ -17,6 +17,8 @@ export const fetchAndShuffleCards = async (
         } catch (error) {
             console.error('Error fetching data:', error)
         } finally {
-            dispatch({type: ActionType.setLoading, payload: false })
+            setTimeout(() => {
+                dispatch({type: ActionType.setLoading, payload: false })
+            }, 1500);
         }
     }

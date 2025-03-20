@@ -26,8 +26,8 @@ const GamePage = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const fetchData = async () => {
-            fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
+        const fetchData = async () => {     
+            await fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
         }
         fetchData()
     }, [])
@@ -36,7 +36,6 @@ const GamePage = () => {
         if(state.flippedCards.length === 1){
             dispatch({type: ActionType.incrementAttempts})
         }
-        
         handleCardClick(cardId, state, dispatch, state.memory, )
     }
     
@@ -60,9 +59,12 @@ const GamePage = () => {
     const retryGame = () => {
         setShowModal(false)
         setIsGameFinished(false)
-        fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
+        dispatch({type: ActionType.setLoading, payload: true})
+        setTimeout(() => {   
+            fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
+            dispatch({ type: ActionType.resetMatchedCards})
+        }, 1500);
         navigate('/gamePage', {state: {difficulty: difficulty}})
-        dispatch({ type: ActionType.resetMatchedCards})
       }
     
       const changeDifficulty = () => {
@@ -78,7 +80,6 @@ const GamePage = () => {
 
   return (
     <div className="text-center pt-20">
-
     {!isGameFinished && (
         <button onClick={backBtn} 
         className="border border-black px-1 text-2xl rounded-xl bg-blue-600 text-white hover:bg-blue-800 ease-in duration-100 cursor-pointer"
@@ -86,15 +87,12 @@ const GamePage = () => {
             Back
         </button>
     )}
-
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10">Level of difficulty: {difficulty}</h1>
         <h2 className="mb-16">Attempts: {state.attempts}</h2>
-
         {showModal && (
             <DisplayModal retryGame={retryGame} changeDifficulty={changeDifficulty} storedUsername={storedUsername} />
         )}
-
         {!showModal && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
         )}
