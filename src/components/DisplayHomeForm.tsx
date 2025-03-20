@@ -12,7 +12,7 @@ const DisplayHomeForm = ({handleSubmit, username, setUsername}: IDisplayHomeForm
   return (
     <form 
     onSubmit={handleSubmit} 
-    className="p-14 rounded-2xl ease-in duration-100"
+    className="p-20 rounded-2xl ease-in duration-100"
     style={{
       border: `0.2rem solid ${theme.border}`
     }}
@@ -26,7 +26,7 @@ const DisplayHomeForm = ({handleSubmit, username, setUsername}: IDisplayHomeForm
       style={{ borderColor: theme.border, color: theme.color}}
        />
        <button 
-       className="block mx-auto border-2 p-1 rounded-lg text-xl ease-in duration-100 cursor-pointer"
+       className="block mx-auto mt-4 border-2 p-1 rounded-lg text-xl ease-in duration-100 cursor-pointer"
        style={{color: theme.color}}
        >
         Enter Game
