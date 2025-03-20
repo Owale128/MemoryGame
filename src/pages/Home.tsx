@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <>
-      <h1 className="text-center text-4xl mt-14 ease-in duration-100" style={{color: theme.color}}>Välkommen till Memory!</h1>
+      <h1 className="text-center text-4xl mt-14 ease-in duration-100" style={{color: theme.color}}>Welcome to Memory Game!</h1>
     <div className="flex justify-center items-center place-items-center my-44">
       <DisplayHomeForm 
       username={username}

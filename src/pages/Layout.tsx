@@ -13,13 +13,24 @@ const Layout = () => {
     <ThemeContext.Provider value={theme}>
       <div className="body ease-in duration-150" style={{backgroundColor: theme.background}}>
       <header className="flex justify-end p-6">
+
         <button 
-        className="border rounded-xl px-2 text-lg cursor-pointer"
+        className="flex flex-col items-center px-6 text-lg cursor-pointer"
         style={{color: theme.border}}
-        onClick={toggleTheme}
-        >
-          Byt tema
-          </button>
+        onClick={toggleTheme}>
+         Theme
+        {theme === themes.light ? (
+          <img 
+          src="/public/MoonIcon.png" 
+          alt="Moon Icon" width={25} />
+        ) : (
+          <img 
+          src="/public/BulbIcon.png" 
+          alt="BulbIcon" width={25} 
+          className="filter invert brightness-100" />
+        )}
+        </button>
+
       </header>
         <main>
             <Outlet />
