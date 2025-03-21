@@ -3,6 +3,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Difficulty from "./pages/Difficulty";
 import GamePage from "./pages/GamePage";
+import Category from "./pages/Category";
 
 export const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
         {
             path: '/',
             element: <Home />
+        },
+        {
+            path: '/categories',
+            element: <Category />
         },
         {
             path: '/difficulty',

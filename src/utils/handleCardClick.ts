@@ -1,6 +1,7 @@
 import { Dispatch } from "react";
-import { ActionType, IAction, IState } from "../redcer/cardReducer";
+import { ActionType, IAction } from "../redcer/cardReducer";
 import { IGamePage } from "../model/IGamePage";
+import { IState } from "../model/IState";
 
 export const handleCardClick = (
     cardId: string,

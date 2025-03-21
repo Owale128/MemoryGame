@@ -14,7 +14,7 @@ const Home = () => {
         sessionStorage.setItem('username', username)
         if(username.trim() === '') return alert('Please enter username')
         setUsername('')
-        navigate('/difficulty')
+        navigate('/categories')
     }
 
   return (
