@@ -17,8 +17,8 @@ const Layout = () => {
   return (
     <ThemeContext.Provider value={theme}>
       <div className="body ease-in duration-150" style={{backgroundColor: theme.background}}>
+     
       <header className="flex justify-end p-6">
-
         <button 
         className="flex flex-col items-center px-6 text-lg cursor-pointer"
         style={{color: theme.border}}
@@ -35,8 +35,8 @@ const Layout = () => {
           className="filter invert brightness-100" />
         )}
         </button>
-
       </header>
+      
         <motion.main
         key={location.key}
         initial={{ opacity: 0 }}

@@ -23,6 +23,7 @@ const GamePage = () => {
     const [isGameFinished, setIsGameFinished] = useState(false)
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
+    const categoryId = sessionStorage.getItem('category')
     const offset = 600
     const limit = getCardCount(difficulty)
     const navigate = useNavigate()
@@ -49,7 +50,7 @@ const GamePage = () => {
             setTimeout(async () => {
                 setShowModal(true)
                     try {
-                        await axios.put('http://localhost:3000/saveScore', {username: storedUsername, attempts: state.attempts, difficulty})
+                        await axios.put('http://localhost:3000/saveScore', {username: storedUsername, attempts: state.attempts, difficulty, categoryId})
                         console.log('Score sent to backend successfully')
                     } catch (error) {
                         console.error('Error sending score to backend')
