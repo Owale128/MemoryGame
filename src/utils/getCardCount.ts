@@ -1,5 +1,5 @@
 
-export const getCardCount = (difficulty: string | null) => {
+export const getCardCount = (difficulty: string) => {
 
     switch(difficulty) {
         case 'Easy':

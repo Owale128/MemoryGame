@@ -1,4 +1,3 @@
-import axios from "axios"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import DisplayCategory from "../components/DisplayCategory";
@@ -6,7 +5,7 @@ import { ICategory } from "../model/ICategory";
 import Spinner from "../components/Spinner";
 import { ThemeContext } from "../context/ThemeContext";
 import QuitBtn from "../components/QuitBtn";
-import { BASE_URL } from "../utils/baseUrl";
+import { getCategories } from "../services/cardService";
 
 const Category = () => {
     const [categories, setCategories] = useState<ICategory[]>([])
@@ -16,9 +15,9 @@ const Category = () => {
 
     useEffect(() => {
         const fetchCategories = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/categories`)
-                setCategories(response.data)
+        try {
+                const fetchedCategories = await getCategories()
+                setCategories(fetchedCategories)
                 setLoading(false)
             } catch (error) {
                 console.error('Failed to load categories')
@@ -34,6 +33,7 @@ const Category = () => {
     }
 
         if(loading) return <Spinner />
+        
   return (
     <div>
         <div className="flex justify-center -mt-16 mb-16">

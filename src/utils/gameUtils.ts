@@ -5,13 +5,14 @@ import { duplicateCards } from "./duplicateCards"
 import { shuffle } from "./shuffleCards"
 
 export const fetchAndShuffleCards = async (
-    limit: number, 
-    offset: number, 
+    categoryId: number,
+    cardCount: number,
     dispatch: Dispatch<IAction>, 
-    setGameStarted: (gameStarted: boolean) => void) => {
+    setGameStarted: (gameStarted: boolean) => void
+) => {
         try {
-            const memoryCards = await getCards(limit, offset)
-            const duplicatedCards = shuffle(duplicateCards(memoryCards))
+            const memoryCards = await getCards(categoryId)
+            const duplicatedCards = shuffle(duplicateCards(memoryCards).slice(0, cardCount))
             dispatch({type: ActionType.setMemory, payload: duplicatedCards})
             setGameStarted(true)
         } catch (error) {

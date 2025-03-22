@@ -4,13 +4,12 @@ import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
 import { getCardCount } from "../utils/getCardCount";
-import axios from "axios";
 import DisplayModal from "../components/DisplayModal";
 import { fetchAndShuffleCards } from "../utils/gameUtils";
-import Spinner from "../components/Spinner";
 import { ThemeContext } from "../context/ThemeContext";
+import { saveScore } from "../services/cardService";
 import BackBtn from "../components/BackBtn";
-import { BASE_URL } from "../utils/baseUrl";
+import Spinner from "../components/Spinner";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -25,15 +24,14 @@ const GamePage = () => {
     const [isGameFinished, setIsGameFinished] = useState(false)
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
-    const categoryId = sessionStorage.getItem('category')
-    const offset = 600
-    const limit = getCardCount(difficulty)
+    const categoryId = parseInt(sessionStorage.getItem('category') || '0')
+    const cardCount = getCardCount(difficulty)
     const navigate = useNavigate()
     const theme = useContext(ThemeContext)
-
+    
     useEffect(() => {
         const fetchData = async () => {     
-            await fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
+            await fetchAndShuffleCards(categoryId, cardCount, dispatch, setGameStarted)
         }
         fetchData()
     }, [])
@@ -52,7 +50,7 @@ const GamePage = () => {
             setTimeout(async () => {
                 setShowModal(true)
                     try {
-                        await axios.put(`${BASE_URL}/saveScore`, {username: storedUsername, attempts: state.attempts, difficulty, categoryId})
+                        await saveScore(storedUsername, state.attempts, difficulty, categoryId)
                         console.log('Score sent to backend successfully')
                     } catch (error) {
                         console.error('Error sending score to backend')
@@ -67,7 +65,7 @@ const GamePage = () => {
         setIsGameFinished(false)
         dispatch({type: ActionType.setLoading, payload: true})
         setTimeout(() => {   
-            fetchAndShuffleCards(limit, offset, dispatch, setGameStarted)
+            fetchAndShuffleCards(categoryId, cardCount, dispatch, setGameStarted)
             dispatch({ type: ActionType.resetMatchedCards})
         }, 1200);
         navigate('/gamePage', {state: {difficulty: difficulty}})
