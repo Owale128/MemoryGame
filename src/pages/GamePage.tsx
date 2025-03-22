@@ -9,6 +9,8 @@ import DisplayModal from "../components/DisplayModal";
 import { fetchAndShuffleCards } from "../utils/gameUtils";
 import Spinner from "../components/Spinner";
 import { ThemeContext } from "../context/ThemeContext";
+import BackBtn from "../components/BackBtn";
+import { BASE_URL } from "../utils/baseUrl";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -50,7 +52,7 @@ const GamePage = () => {
             setTimeout(async () => {
                 setShowModal(true)
                     try {
-                        await axios.put('http://localhost:3000/saveScore', {username: storedUsername, attempts: state.attempts, difficulty, categoryId})
+                        await axios.put(`${BASE_URL}/saveScore`, {username: storedUsername, attempts: state.attempts, difficulty, categoryId})
                         console.log('Score sent to backend successfully')
                     } catch (error) {
                         console.error('Error sending score to backend')
@@ -76,20 +78,14 @@ const GamePage = () => {
         navigate('/difficulty')
       }
 
-      const backBtn = () => {
-        navigate('/difficulty')
-      }
-
     if(state.loading) return <Spinner />
 
   return (
     <div className="text-center pt-20">
     {!isGameFinished && (
-        <button onClick={backBtn} 
-        className="border border-black px-1 text-2xl rounded-xl bg-blue-600 text-white hover:bg-blue-800 ease-in duration-100 cursor-pointer"
-        >
-            Back
-        </button>
+        <div className="-mt-36 mb-40">
+        <BackBtn navigateTo="/difficulty" />
+        </div>
     )}
     <div className="flex flex-col justify-center items-center text-3xl my-16">
         <h1 className="mb-10 ease-in duration-100" style={{color: theme.color}}>Level of difficulty: {difficulty}</h1>

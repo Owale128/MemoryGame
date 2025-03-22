@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import QuitBtn from "./QuitBtn"
+import QuitBtn from "./QuitBtn";
 
 interface IDisplayModal {
     storedUsername: string;
@@ -39,7 +39,7 @@ const DisplayModal = ({retryGame, changeDifficulty, storedUsername}: IDisplayMod
         Change difficulty
         </button>
 
-        <QuitBtn />
+        <QuitBtn navigateTo="/" />
     </motion.div>
     </motion.div>
       

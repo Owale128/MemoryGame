@@ -5,6 +5,8 @@ import DisplayCategory from "../components/DisplayCategory";
 import { ICategory } from "../model/ICategory";
 import Spinner from "../components/Spinner";
 import { ThemeContext } from "../context/ThemeContext";
+import QuitBtn from "../components/QuitBtn";
+import { BASE_URL } from "../utils/baseUrl";
 
 const Category = () => {
     const [categories, setCategories] = useState<ICategory[]>([])
@@ -15,7 +17,7 @@ const Category = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/categories')
+                const response = await axios.get(`${BASE_URL}/categories`)
                 setCategories(response.data)
                 setLoading(false)
             } catch (error) {
@@ -30,9 +32,13 @@ const Category = () => {
         sessionStorage.setItem('category', categoryId.toString())
         navigate('/difficulty')
     }
+
         if(loading) return <Spinner />
   return (
     <div>
+        <div className="flex justify-center -mt-16 mb-16">
+        <QuitBtn navigateTo="/" />
+        </div>
       <h1 style={{color: theme.color}} className="text-center text-3xl">Select Category</h1>
         <DisplayCategory 
         categories={categories}

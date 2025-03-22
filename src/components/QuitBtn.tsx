@@ -2,7 +2,11 @@ import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
 
-const QuitBtn = () => {
+interface IBackBtn {
+    navigateTo: string;
+  }
+
+const QuitBtn = ({navigateTo}: IBackBtn) => {
 const navigate = useNavigate()
 const theme = useContext(ThemeContext)
 
@@ -10,7 +14,7 @@ const quit = () => {
     const isConfirmed = confirm('Are you sure?')
     sessionStorage.removeItem('username')
     sessionStorage.removeItem('difficulty')
-    if(isConfirmed) navigate('/')
+    if(isConfirmed) navigate(navigateTo)
 }
 
   return (
