@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom"
+import useNavigation from "../hooks/useNavigation";
 
 interface IBackBtn {
   navigateTo: string;
 }
 
 const BackBtn = ({navigateTo}: IBackBtn) => {
-const navigate = useNavigate()
+const { goTo } = useNavigation()
 
 const backBtn = () => {
-  navigate(navigateTo)
+  goTo(navigateTo)
 }
 
   return (

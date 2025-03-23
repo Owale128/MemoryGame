@@ -3,15 +3,15 @@ export const getCardCount = (difficulty: string) => {
 
     switch(difficulty) {
         case 'Easy':
-            return 4
+            return 8
 
             case 'Medium':
-                return 6
+                return 12
 
                 case 'Hard':
-                    return 8
+                    return 16
 
                 default: 
-                    return 6
+                    return 8
     }
 }

@@ -1,20 +1,20 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
 import { ThemeContext } from "../context/ThemeContext"
+import useNavigation from "../hooks/useNavigation";
 
 interface IBackBtn {
     navigateTo: string;
   }
 
 const QuitBtn = ({navigateTo}: IBackBtn) => {
-const navigate = useNavigate()
+const { goTo } = useNavigation()
 const theme = useContext(ThemeContext)
 
 const quit = () => {
     const isConfirmed = confirm('Are you sure?')
     sessionStorage.removeItem('username')
     sessionStorage.removeItem('difficulty')
-    if(isConfirmed) navigate(navigateTo)
+    if(isConfirmed) goTo(navigateTo)
 }
 
   return (

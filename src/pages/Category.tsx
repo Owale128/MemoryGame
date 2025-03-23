@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
 import DisplayCategory from "../components/DisplayCategory";
 import { ICategory } from "../model/ICategory";
 import Spinner from "../components/Spinner";
 import { ThemeContext } from "../context/ThemeContext";
 import QuitBtn from "../components/QuitBtn";
 import { getCategories } from "../services/cardService";
+import useNavigation from "../hooks/useNavigation";
 
 const Category = () => {
     const [categories, setCategories] = useState<ICategory[]>([])
     const [loading, setLoading] = useState(true)
-    const navigate = useNavigate()
     const theme = useContext(ThemeContext)
+    const { goTo } = useNavigation()
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -29,7 +29,7 @@ const Category = () => {
 
     const handleCategory = (categoryId: number) => {
         sessionStorage.setItem('category', categoryId.toString())
-        navigate('/difficulty')
+        goTo('/difficulty')
     }
 
         if(loading) return <Spinner />

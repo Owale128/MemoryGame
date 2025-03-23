@@ -1,5 +1,4 @@
 import { useContext, useEffect, useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
@@ -10,6 +9,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import { saveScore } from "../services/cardService";
 import BackBtn from "../components/BackBtn";
 import Spinner from "../components/Spinner";
+import useNavigation from "../hooks/useNavigation";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -26,7 +26,7 @@ const GamePage = () => {
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
     const categoryId = parseInt(sessionStorage.getItem('category') || '0')
     const cardCount = getCardCount(difficulty)
-    const navigate = useNavigate()
+    const { goTo } = useNavigation()
     const theme = useContext(ThemeContext)
     
     useEffect(() => {
@@ -68,28 +68,23 @@ const GamePage = () => {
             fetchAndShuffleCards(categoryId, cardCount, dispatch, setGameStarted)
             dispatch({ type: ActionType.resetMatchedCards})
         }, 1200);
-        navigate('/gamePage', {state: {difficulty: difficulty}})
-      }
-    
-      const changeDifficulty = () => {
-        setShowModal(false)
-        navigate('/difficulty')
+        goTo('/gamePage', {state: {difficulty: difficulty}})
       }
 
     if(state.loading) return <Spinner />
 
   return (
-    <div className="text-center pt-20">
+    <div className="text-center pb-14 relative">
     {!isGameFinished && (
-        <div className="-mt-36 mb-40">
+        <div className="-mt-20 absolute left-8">
         <BackBtn navigateTo="/difficulty" />
         </div>
     )}
-    <div className="flex flex-col justify-center items-center text-3xl my-16">
+    <div className="flex flex-col justify-center items-center text-3xl">
         <h1 className="mb-10 ease-in duration-100" style={{color: theme.color}}>Level of difficulty: {difficulty}</h1>
         <h2 className="mb-16 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h2>
         {showModal && (
-            <DisplayModal retryGame={retryGame} changeDifficulty={changeDifficulty} storedUsername={storedUsername} />
+            <DisplayModal retryGame={retryGame} setShowModal={setShowModal} storedUsername={storedUsername} />
         )}
         {!showModal && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />

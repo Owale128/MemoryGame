@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { IState } from "../model/IState"
 import { motion } from "framer-motion"
 import { ThemeContext } from "../context/ThemeContext"
+import { BASE_URL } from "../utils/baseUrl"
 
 interface IDisplaymemoryCards {
     state: IState
@@ -11,12 +12,12 @@ interface IDisplaymemoryCards {
 const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
     const theme = useContext(ThemeContext)
   return (
-    <>
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {state.memory.length === 0 ? (
             <p className="mt-10 ease-in duration-100" style={{color: theme.color}}>No Characters Found</p>
         ) : (
             state.memory.map((c, index) => (
-            <div className="grid grid-cols-4 gap-2 ">
+            <div>
                 <motion.div 
                 key={`${c.id} - ${index}`}
                 onClick={() => handleCardClick(c.id)}
@@ -27,9 +28,9 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                 >
                     {state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? (
                         <img 
-                        src={`${c.thumbnail.path}.${c.thumbnail.extension}`} 
+                        src={`${BASE_URL}${c.imgUrl}`} 
                         alt={c.name}
-                        className="w-full h-full object-cover rounded-lg"
+                        className=" h-44 rounded-lg"
                         />
                     ) : (
                         <span className="text-white text-3xl font-bold">?</span>
@@ -38,7 +39,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
             </div>
             ))
         )}
-</>
+</div>
   )
 }
 
