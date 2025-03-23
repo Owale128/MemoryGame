@@ -27,8 +27,9 @@ const Category = () => {
         fetchCategories()
     }, [])
 
-    const handleCategory = (categoryId: number) => {
-        sessionStorage.setItem('category', categoryId.toString())
+    const handleCategory = (categoryId: number, categoryName: string) => {
+        sessionStorage.setItem('categoryId', categoryId.toString())
+        sessionStorage.setItem('categoryName', categoryName)
         goTo('/difficulty')
     }
 
@@ -36,7 +37,7 @@ const Category = () => {
         
   return (
     <div>
-        <div className="flex justify-center -mt-16 mb-16">
+        <div className="flex justify-center -mt-20 mb-16">
         <QuitBtn navigateTo="/" />
         </div>
       <h1 style={{color: theme.color}} className="text-center text-3xl">Select Category</h1>

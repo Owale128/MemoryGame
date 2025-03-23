@@ -14,10 +14,9 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {state.memory.length === 0 ? (
-            <p className="mt-10 ease-in duration-100" style={{color: theme.color}}>No Characters Found</p>
+            <p className="col-span-full mt-10 ease-in duration-100" style={{color: theme.color}}>No Characters Found</p>
         ) : (
             state.memory.map((c, index) => (
-            <div>
                 <motion.div 
                 key={`${c.id} - ${index}`}
                 onClick={() => handleCardClick(c.id)}
@@ -36,7 +35,6 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                         <span className="text-white text-3xl font-bold">?</span>
                     )}
                 </motion.div>
-            </div>
             ))
         )}
 </div>

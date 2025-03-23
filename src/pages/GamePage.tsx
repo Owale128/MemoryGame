@@ -24,7 +24,8 @@ const GamePage = () => {
     const [isGameFinished, setIsGameFinished] = useState(false)
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
-    const categoryId = parseInt(sessionStorage.getItem('category') || '0')
+    const categoryId = parseInt(sessionStorage.getItem('categoryId') || '0')
+    const category = sessionStorage.getItem('categoryName') || ''
     const cardCount = getCardCount(difficulty)
     const { goTo } = useNavigation()
     const theme = useContext(ThemeContext)
@@ -50,10 +51,10 @@ const GamePage = () => {
             setTimeout(async () => {
                 setShowModal(true)
                     try {
-                        await saveScore(storedUsername, state.attempts, difficulty, categoryId)
+                        await saveScore(storedUsername, state.attempts, difficulty, category)
                         console.log('Score sent to backend successfully')
                     } catch (error) {
-                        console.error('Error sending score to backend')
+                        console.error('Error sending score to backend', error)
                     }
                 setIsGameFinished(true)
             }, 1600);
@@ -81,10 +82,9 @@ const GamePage = () => {
         </div>
     )}
     <div className="flex flex-col justify-center items-center text-3xl">
-        <h1 className="mb-10 ease-in duration-100" style={{color: theme.color}}>Level of difficulty: {difficulty}</h1>
-        <h2 className="mb-16 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h2>
+        {!isGameFinished && <h1 className="mb-16 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
         {showModal && (
-            <DisplayModal retryGame={retryGame} setShowModal={setShowModal} storedUsername={storedUsername} />
+            <DisplayModal state={state} storedUsername={storedUsername} retryGame={retryGame} setShowModal={setShowModal} />
         )}
         {!showModal && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />

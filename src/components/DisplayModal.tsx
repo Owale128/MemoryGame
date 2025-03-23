@@ -5,14 +5,16 @@ import { ThemeContext } from "../context/ThemeContext";
 import useNavigation from "../hooks/useNavigation";
 
 interface IDisplayModal {
+    state: {attempts: number}
+    storedUsername: string;
     retryGame: () => void;
     setShowModal: (modal: boolean) => void;
-    storedUsername: string;
 }
 
-const DisplayModal = ({retryGame, setShowModal, storedUsername}: IDisplayModal) => {
+const DisplayModal = ({state, storedUsername,retryGame, setShowModal}: IDisplayModal) => {
     const { goTo } = useNavigation()
     const theme = useContext(ThemeContext)
+    const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
 
     const changeDifficulty = () => {
         setShowModal(false)
@@ -39,8 +41,10 @@ const DisplayModal = ({retryGame, setShowModal, storedUsername}: IDisplayModal) 
         exit={{ scale: 0 }}
         transition={{ duration: 0.5 }}
     >
-        <h2 style={{color: theme.color}} className="text-3xl mb-4 mt-8">Congratulations {storedUsername}</h2>
-        <p style={{color: theme.color}} className="text-2xl mb-32">You finished the game!</p>
+        <h1 style={{color: theme.color}} className="text-3xl mb-4 mt-8">Congratulations {storedUsername}</h1>
+        <p style={{color: theme.color}} className="text-2xl mb-10">You finished the game!</p>
+        <h2 className="mb-6 ease-in duration-100" style={{color: theme.color}}>Level of difficulty: {difficulty}</h2>
+        <h3 className="mb-32 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h3>
 
         <button 
         className="border rounded-xl px-1 text-3xl bg-green-500  hover:bg-white ease-in duration-150 cursor-pointer"
@@ -49,14 +53,14 @@ const DisplayModal = ({retryGame, setShowModal, storedUsername}: IDisplayModal) 
             Retry
         </button>
         <button 
-        className="border rounded-xl px-1 text-3xl mx-10 bg-amber-300 hover:bg-white ease-in duration-150 cursor-pointer"
+        className="border rounded-xl px-1 text-3xl ml-5 bg-amber-300 hover:bg-white ease-in duration-150 cursor-pointer"
         onClick={changeDifficulty}
         >
         Change difficulty
         </button>
 
         <button 
-        className="border rounded-xl px-1 text-3xl mx-10 bg-amber-300 hover:bg-white ease-in duration-150 cursor-pointer"
+        className="border rounded-xl px-1 text-3xl mx-5 bg-blue-400 hover:bg-white ease-in duration-150 cursor-pointer"
         onClick={changeCategory}
         >
         Change category

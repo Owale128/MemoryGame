@@ -1,5 +1,3 @@
-import { useContext } from "react"
-import { ThemeContext } from "../context/ThemeContext"
 import useNavigation from "../hooks/useNavigation";
 
 interface IBackBtn {
@@ -8,20 +6,21 @@ interface IBackBtn {
 
 const QuitBtn = ({navigateTo}: IBackBtn) => {
 const { goTo } = useNavigation()
-const theme = useContext(ThemeContext)
 
 const quit = () => {
     const isConfirmed = confirm('Are you sure?')
     sessionStorage.removeItem('username')
     sessionStorage.removeItem('difficulty')
+    sessionStorage.removeItem('categoryId')
+    sessionStorage.removeItem('categoryName')
     if(isConfirmed) goTo(navigateTo)
 }
 
   return (
     <button
     onClick={quit}
-    className="border rounded-xl px-2 text-2xl hover:bg-white ease-in duration-150 hover:text-black cursor-pointer"
-    style={{backgroundColor: theme.background, color: theme.color}}>
+    className="border border-black rounded-xl px-2 text-2xl bg-red-700 text-white hover:bg-white ease-in duration-150 hover:text-black cursor-pointer"
+  >
       Quit 
     </button>
   )

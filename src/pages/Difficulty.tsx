@@ -7,7 +7,7 @@ import useNavigation from "../hooks/useNavigation"
 const Difficulty = () => {
   const { goTo } = useNavigation()
   const theme = useContext(ThemeContext)
-  const categoryId = sessionStorage.getItem('category')
+  const categoryId = sessionStorage.getItem('categoryId')
 
   const handleDifficulty = (diffi: string) => {
     sessionStorage.setItem('difficulty', diffi)
@@ -18,7 +18,7 @@ const Difficulty = () => {
 
   return (
     <div className="text-center relative">
-      <div className="-mt-16  absolute left-8">
+      <div className="-mt-20  absolute left-8">
     <BackBtn navigateTo='/categories' />
       </div>
     <div className="flex flex-col items-center">

@@ -15,9 +15,9 @@ export const getCards = async (categoryId: number): Promise<IGamePage[]> => {
     return response.data
 }
 
-export const saveScore = async (username: string, attempts: number, difficulty: string, categoryId: number) => {
+export const saveScore = async (username: string, attempts: number, difficulty: string, category: string) => {
     const url = `${BASE_URL}/saveScore`
-    const data = {username, attempts, difficulty, categoryId}
+    const data = {username, attempts, difficulty, category}
     const response = await put(url, data)
     return response.data
 }
