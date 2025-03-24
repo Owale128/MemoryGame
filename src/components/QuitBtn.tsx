@@ -19,7 +19,7 @@ const quit = () => {
   return (
     <button
     onClick={quit}
-    className="border border-black rounded-xl px-2 text-2xl bg-red-700 text-white hover:bg-white ease-in duration-150 hover:text-black cursor-pointer"
+    className="border border-black rounded-xl px-2 text-3xl bg-red-700 text-white hover:bg-white ease-in duration-150 hover:text-black cursor-pointer"
   >
       Quit 
     </button>

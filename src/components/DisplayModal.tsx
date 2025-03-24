@@ -41,8 +41,8 @@ const DisplayModal = ({state, storedUsername,retryGame, setShowModal}: IDisplayM
         exit={{ scale: 0 }}
         transition={{ duration: 0.5 }}
     >
-        <h1 style={{color: theme.color}} className="text-3xl mb-4 mt-8">Congratulations {storedUsername}</h1>
-        <p style={{color: theme.color}} className="text-2xl mb-10">You finished the game!</p>
+        <h1 style={{color: theme.color}} className="text-3xl mb-4 mt-8 ease-in duration-100">Congratulations {storedUsername}</h1>
+        <p style={{color: theme.color}} className="text-2xl mb-10 ease-in duration-100">You finished the game!</p>
         <h2 className="mb-6 ease-in duration-100" style={{color: theme.color}}>Level of difficulty: {difficulty}</h2>
         <h3 className="mb-32 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h3>
 

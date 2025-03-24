@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Difficulty from "./pages/Difficulty";
 import GamePage from "./pages/GamePage";
 import Category from "./pages/Category";
+import NotFound from "./components/NotFound";
 
 export const router = createBrowserRouter([
     {
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
             path: '/gamePage',
             element: <GamePage />
         },
-       ]
+       ],
+       errorElement: <NotFound />
     }
 ])
