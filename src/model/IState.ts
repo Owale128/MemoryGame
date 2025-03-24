@@ -6,4 +6,8 @@ export interface IState {
     memory: IGamePage[]
     flippedCards: string[];
     matchedCards: string[];
+    error: string | null;
+    showModal: boolean;
+    gameStarted: boolean;
+    isGameFinished: boolean;
 }

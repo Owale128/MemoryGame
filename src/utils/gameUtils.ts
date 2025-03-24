@@ -8,18 +8,18 @@ export const fetchAndShuffleCards = async (
     categoryId: number,
     cardCount: number,
     dispatch: Dispatch<IAction>, 
-    setGameStarted: (gameStarted: boolean) => void
 ) => {
         try {
             const memoryCards = await getCards(categoryId)
             const duplicatedCards = shuffle(duplicateCards(memoryCards).slice(0, cardCount))
             dispatch({type: ActionType.setMemory, payload: duplicatedCards})
-            setGameStarted(true)
+            dispatch({type: ActionType.setGameStarted, payload: true})
         } catch (error) {
             console.error('Error fetching data:', error)
         } finally {
             setTimeout(() => {
                 dispatch({type: ActionType.setLoading, payload: false })
+                dispatch({type: ActionType.setError, payload: 'An error occurred while fetching cards'})
             }, 1600);
         }
     }

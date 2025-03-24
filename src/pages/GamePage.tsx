@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
@@ -17,22 +17,23 @@ const GamePage = () => {
         matchedCards: [],
         attempts: 0,
         loading: true,
-        memory: []
+        memory: [],
+        error: null,
+        showModal: false,
+        gameStarted: false,
+        isGameFinished: false
     })
-    const [showModal, setShowModal] = useState(false)
-    const [gameStarted, setGameStarted] = useState(false)
-    const [isGameFinished, setIsGameFinished] = useState(false)
+    const { goTo } = useNavigation()
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
     const categoryId = parseInt(sessionStorage.getItem('categoryId') || '0')
     const category = sessionStorage.getItem('categoryName') || ''
     const cardCount = getCardCount(difficulty)
-    const { goTo } = useNavigation()
     const theme = useContext(ThemeContext)
     
     useEffect(() => {
         const fetchData = async () => {     
-            await fetchAndShuffleCards(categoryId, cardCount, dispatch, setGameStarted)
+            await fetchAndShuffleCards(categoryId, cardCount, dispatch)
         }
         fetchData()
     }, [])
@@ -47,26 +48,26 @@ const GamePage = () => {
     const finishedGame = state.matchedCards.length === state.memory.length
 
     useEffect(() => {
-        if(gameStarted && finishedGame) {
+        if(state.gameStarted && finishedGame) {
             setTimeout(async () => {
-                setShowModal(true)
+                dispatch({type: ActionType.setShowModal, payload: true})
                     try {
                         await saveScore(storedUsername, state.attempts, difficulty, category)
                         console.log('Score sent to backend successfully')
                     } catch (error) {
                         console.error('Error sending score to backend', error)
                     }
-                setIsGameFinished(true)
+                dispatch({type: ActionType.setIsGameFinished, payload: true}) 
             }, 1600);
         }
-    }, [gameStarted, finishedGame])
+    }, [state.gameStarted, finishedGame])
 
     const retryGame = () => {
-        setShowModal(false)
-        setIsGameFinished(false)
+       dispatch({type: ActionType.setShowModal, payload: false})
+        dispatch({type: ActionType.setIsGameFinished, payload: false})
         dispatch({type: ActionType.setLoading, payload: true})
         setTimeout(() => {   
-            fetchAndShuffleCards(categoryId, cardCount, dispatch, setGameStarted)
+            fetchAndShuffleCards(categoryId, cardCount, dispatch)
             dispatch({ type: ActionType.resetMatchedCards})
         }, 1200);
         goTo('/gamePage', {state: {difficulty: difficulty}})
@@ -76,17 +77,17 @@ const GamePage = () => {
 
   return (
     <div className="text-center pb-14 relative">
-    {!isGameFinished && (
+    {!state.isGameFinished && (
         <div className="-mt-16 absolute left-8">
         <BackBtn navigateTo="/difficulty" />
         </div>
     )}
     <div className="flex flex-col justify-center items-center text-3xl">
-        {!isGameFinished && <h1 className="mb-8 mt-10 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
-        {showModal && (
-            <DisplayModal state={state} storedUsername={storedUsername} retryGame={retryGame} setShowModal={setShowModal} />
+        {!state.isGameFinished && <h1 className="mb-8 mt-10 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
+        {state.showModal && (
+            <DisplayModal state={state} storedUsername={storedUsername} retryGame={retryGame} dispatch={dispatch} />
         )}
-        {!showModal && (
+        {!state.showModal && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
         )}
     </div>

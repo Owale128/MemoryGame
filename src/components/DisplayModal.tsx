@@ -1,28 +1,29 @@
 import { motion } from "framer-motion"
 import QuitBtn from "./QuitBtn";
-import { useContext } from "react";
+import { Dispatch, useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import useNavigation from "../hooks/useNavigation";
+import { ActionType, IAction } from "../redcer/cardReducer";
 
 interface IDisplayModal {
     state: {attempts: number}
     storedUsername: string;
     retryGame: () => void;
-    setShowModal: (modal: boolean) => void;
+    dispatch: Dispatch<IAction>
 }
 
-const DisplayModal = ({state, storedUsername,retryGame, setShowModal}: IDisplayModal) => {
+const DisplayModal = ({state, storedUsername, retryGame, dispatch}: IDisplayModal) => {
     const { goTo } = useNavigation()
     const theme = useContext(ThemeContext)
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
 
     const changeDifficulty = () => {
-        setShowModal(false)
+       dispatch({type: ActionType.setShowModal, payload: false})
         goTo('/difficulty')
       }
 
     const changeCategory = () => {
-        setShowModal(false)
+        dispatch({type: ActionType.setShowModal, payload: false})
         goTo('/categories')
       }
 

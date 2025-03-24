@@ -13,7 +13,11 @@ export enum ActionType {
     resetMatchedCards,
     incrementAttempts,
     setLoading,
-    setMemory
+    setMemory,
+    setError,
+    setShowModal,
+    setGameStarted,
+    setIsGameFinished,
 }
 
 export const cardReducer = (state: IState, action: IAction) => {
@@ -43,6 +47,18 @@ export const cardReducer = (state: IState, action: IAction) => {
 
                                 case ActionType.setMemory:
                                     return {...state, memory: action.payload as IGamePage[]}
+
+                                    case ActionType.setError:
+                                        return {...state, error: action.payload as string}
+
+                                        case ActionType.setShowModal:
+                                            return {...state, showModal: action.payload as boolean}
+
+                                            case ActionType.setGameStarted:
+                                                return {...state, gameStarted: action.payload as boolean}
+
+                                                case ActionType.setIsGameFinished:
+                                                    return {...state, isGameFinished: action.payload as boolean}
                     default:
                         return state;
         }
