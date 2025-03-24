@@ -28,14 +28,14 @@ const DisplayModal = ({state, storedUsername,retryGame, setShowModal}: IDisplayM
 
   return (
     <motion.div
-        className="modal-overlay"
+        className="modal-overlay w-full p-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
         >
     <motion.div
-        className="modal-content text-center"
+        className="modal-content flex flex-col justify-center items-center text-center"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         exit={{ scale: 0 }}
@@ -47,23 +47,23 @@ const DisplayModal = ({state, storedUsername,retryGame, setShowModal}: IDisplayM
         <h3 className="mb-32 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h3>
 
         <button 
-        className="border rounded-xl px-1 text-3xl bg-green-500  hover:bg-white ease-in duration-150 cursor-pointer"
+        className="w-full sm:w-2xl md:w-3xl border rounded-xl text-3xl p-3 bg-green-500  hover:bg-white ease-in duration-150 cursor-pointer"
         onClick={retryGame}
         >
             Retry
         </button>
         <button 
-        className="border rounded-xl px-1 text-3xl ml-5 bg-amber-300 hover:bg-white ease-in duration-150 cursor-pointer"
+        className="w-full sm:w-2xl md:w-3xl border rounded-xl text-3xl my-6 p-3 bg-amber-300 hover:bg-white ease-in duration-150 cursor-pointer"
         onClick={changeDifficulty}
         >
-        Change difficulty
+        Difficulty
         </button>
 
         <button 
-        className="border rounded-xl px-1 text-3xl mx-5 bg-blue-400 hover:bg-white ease-in duration-150 cursor-pointer"
+        className="w-full border sm:w-2xl md:w-3xl rounded-xl text-3xl mb-6 p-3 bg-blue-400 hover:bg-white ease-in duration-150 cursor-pointer"
         onClick={changeCategory}
         >
-        Change category
+        Category
         </button>
 
         <QuitBtn navigateTo="/" />

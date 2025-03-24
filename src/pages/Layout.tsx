@@ -20,7 +20,7 @@ const Layout = () => {
      
       <header className="flex justify-end p-6">
         <button 
-        className="flex flex-col items-center px-6 text-lg cursor-pointer"
+        className="flex flex-col items-center px-4 text-lg cursor-pointer"
         style={{color: theme.border}}
         onClick={toggleTheme}>
          Theme

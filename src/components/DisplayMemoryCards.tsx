@@ -12,7 +12,7 @@ interface IDisplaymemoryCards {
 const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
     const theme = useContext(ThemeContext)
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 sm:w-2xl md:grid-cols-3 md:w-3xl lg:grid-cols-4 lg:w-4xl gap-4 w-full p-4">
         {state.memory.length === 0 ? (
             <p className="col-span-full mt-10 ease-in duration-100" style={{color: theme.color}}>No Characters Found</p>
         ) : (
@@ -20,7 +20,8 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                 <motion.div 
                 key={`${c.id} - ${index}`}
                 onClick={() => handleCardClick(c.id)}
-                className='cursor-pointer mx-auto w-48 h-48 rounded-lg shadow-lg flex items-center justify-center bg-gray-300 opacity-100'
+                className='w-full h-48 rounded-lg shadow-2xl flex items-center justify-center cursor-pointer'
+                style={{ border: `2px solid ${theme.border}` }}
                 initial={{rotateY: 0}}
                 animate={{rotateY: state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? 180 : 0}}
                 transition={{ duration: 0.5 }}
@@ -29,10 +30,12 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                         <img 
                         src={`${BASE_URL}${c.imgUrl}`} 
                         alt={c.name}
-                        className=" h-44 rounded-lg"
+                        className=" h-44"
                         />
                     ) : (
+                        <div className=" flex items-center justify-center w-full h-full rounded-md bg-gray-400 opacity-100">
                         <span className="text-white text-3xl font-bold">?</span>
+                        </div>
                     )}
                 </motion.div>
             ))

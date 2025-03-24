@@ -77,12 +77,12 @@ const GamePage = () => {
   return (
     <div className="text-center pb-14 relative">
     {!isGameFinished && (
-        <div className="-mt-20 absolute left-8">
+        <div className="-mt-16 absolute left-8">
         <BackBtn navigateTo="/difficulty" />
         </div>
     )}
     <div className="flex flex-col justify-center items-center text-3xl">
-        {!isGameFinished && <h1 className="mb-16 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
+        {!isGameFinished && <h1 className="mb-8 mt-10 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
         {showModal && (
             <DisplayModal state={state} storedUsername={storedUsername} retryGame={retryGame} setShowModal={setShowModal} />
         )}

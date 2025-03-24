@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import useNavigation from "../hooks/useNavigation";
+import { ThemeContext } from "../context/ThemeContext";
 
 interface IBackBtn {
     navigateTo: string;
@@ -6,6 +8,7 @@ interface IBackBtn {
 
 const QuitBtn = ({navigateTo}: IBackBtn) => {
 const { goTo } = useNavigation()
+const theme = useContext(ThemeContext)
 
 const quit = () => {
     const isConfirmed = confirm('Are you sure?')
@@ -19,7 +22,8 @@ const quit = () => {
   return (
     <button
     onClick={quit}
-    className="border border-black rounded-xl px-2 text-3xl bg-red-700 text-white hover:bg-white ease-in duration-150 hover:text-black cursor-pointer"
+    className="text-2xl rounded-xl px-2 bg-red-700 text-white hover:bg-white ease-in duration-150 hover:text-black cursor-pointer"
+    style={{border: `1px solid ${theme.border}`}}
   >
       Quit 
     </button>

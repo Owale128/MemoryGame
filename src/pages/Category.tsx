@@ -9,6 +9,7 @@ import useNavigation from "../hooks/useNavigation";
 
 const Category = () => {
     const [categories, setCategories] = useState<ICategory[]>([])
+    const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(true)
     const theme = useContext(ThemeContext)
     const { goTo } = useNavigation()
@@ -22,6 +23,7 @@ const Category = () => {
             } catch (error) {
                 console.error('Failed to load categories')
                 setLoading(false)
+                setError('Something went wrong while loading categories')
             }
         }
         fetchCategories()
@@ -34,13 +36,22 @@ const Category = () => {
     }
 
         if(loading) return <Spinner />
+
+        if(error) {
+            return(
+                <div className="flex flex-col justify-center items-center mt-52">
+                    <p className="text-red-500 text-4xl mb-10">{error}</p>
+                    <QuitBtn navigateTo="/" />
+                </div>
+            )
+        }
         
   return (
-    <div>
-        <div className="flex justify-center -mt-20 mb-16">
+    <div className="relative">
+        <div className="flex justify-center -mt-24 absolute left-8">
         <QuitBtn navigateTo="/" />
         </div>
-      <h1 style={{color: theme.color}} className="text-center text-3xl">Select Category</h1>
+      <h1 style={{color: theme.color}} className="text-center text-3xl mt-8">Select Category</h1>
         <DisplayCategory 
         categories={categories}
         handleCategory={handleCategory}

@@ -18,11 +18,11 @@ const Difficulty = () => {
 
   return (
     <div className="text-center relative">
-      <div className="-mt-20  absolute left-8">
+      <div className="-mt-14  absolute left-8">
     <BackBtn navigateTo='/categories' />
       </div>
     <div className="flex flex-col items-center">
-      <h1 className="text-3xl mb-14 ease-in duration-100 mt-20" style={{color: theme.color}}>Choose Difficulty</h1>
+      <h1 className="text-3xl mb-14 ease-in duration-100 mt-16" style={{color: theme.color}}>Choose Difficulty</h1>
       <DisplayDifficulty handleDifficulty={handleDifficulty} />
     </div>
     </div>

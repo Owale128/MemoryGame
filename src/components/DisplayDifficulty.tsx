@@ -8,25 +8,25 @@ interface IDisplayDifficulty {
 const DisplayDifficulty = ({handleDifficulty}: IDisplayDifficulty) => {
   const theme = useContext(ThemeContext)
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center w-full p-10">
       <button
-      className="block border border-black rounded-lg text-3xl w-2xl p-4 bg-green-500 ease-in duration-150 hover:bg-green-600 cursor-pointer" 
+      className="w-full sm:w-2xl md:w-3xl lg:w-4xl block rounded-lg text-3xl p-5 bg-green-500 ease-in duration-150 hover:bg-green-600 cursor-pointer" 
       onClick={() => handleDifficulty('Easy')}
-      style={{color: theme.color}}
+      style={{color: theme.color, border: `2px solid ${theme.border}`}}
       >
         Easy
     </button>
       <button
-      className="block border border-black rounded-lg text-3xl w-2xl p-4 bg-yellow-500 my-10 ease-in duration-150 hover:bg-yellow-600 cursor-pointer"  
+      className="w-full sm:w-2xl md:w-3xl lg:w-4xl block border border-black rounded-lg text-3xl p-5 bg-yellow-500 my-10 ease-in duration-150 hover:bg-yellow-600 cursor-pointer"  
       onClick={() => handleDifficulty('Medium')}
-      style={{color: theme.color}}
+      style={{color: theme.color, border: `2px solid ${theme.border}`}}
       >
         Medium
     </button>
       <button 
-      className="block border border-black rounded-lg text-3xl w-2xl p-4 bg-red-500 ease-in duration-150 hover:bg-red-600 cursor-pointer" 
+      className="w-full sm:w-2xl md:w-3xl lg:w-4xl block border border-black rounded-lg text-3xl p-5 bg-red-500 ease-in duration-150 hover:bg-red-600 cursor-pointer" 
       onClick={() => handleDifficulty('Hard')}
-      style={{color: theme.color}}
+      style={{color: theme.color, border: `2px solid ${theme.border}`}}
       >
         Hard
     </button>
