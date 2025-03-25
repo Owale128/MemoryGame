@@ -48,14 +48,16 @@ const Category = () => {
         
   return (
     <div className="relative">
-        <div className="flex justify-center -mt-24 absolute left-8">
+        <div className="flex justify-center absolute top-8 left-8 md:left-12 md:top-12">
         <QuitBtn navigateTo="/" />
         </div>
-      <h1 style={{color: theme.color}} className="text-center text-3xl mt-8">Select Category</h1>
+        <div className="flex flex-col justify-center items-center min-h-screen">
+      <h1 style={{color: theme.theme.color}} className="text-center text-4xl mt-28 md:mt-0 md:mb-4">Select Category</h1>
         <DisplayCategory 
         categories={categories}
         handleCategory={handleCategory}
         />
+        </div>
     </div>
   )
 }

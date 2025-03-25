@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Outlet, useLocation} from "react-router-dom"
-import { ITheme, ThemeContext, themes } from "../context/ThemeContext"
+import { ThemeContext, themes } from "../context/ThemeContext"
 import { motion } from "framer-motion"
+import { ITheme } from "../model/ITheme"
 
 const Layout = () => {
   const savedTheme = localStorage.getItem('theme')
@@ -15,28 +16,9 @@ const Layout = () => {
     }
     
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
       <div className="body ease-in duration-150" style={{backgroundColor: theme.background}}>
-     
-      <header className="flex justify-end p-6">
-        <button 
-        className="flex flex-col items-center px-4 text-lg cursor-pointer"
-        style={{color: theme.border}}
-        onClick={toggleTheme}>
-         Theme
-        {theme === themes.light ? (
-          <img 
-          src="/MoonIcon.png" 
-          alt="Moon Icon" width={25} />
-        ) : (
-          <img 
-          src="/BulbIcon.png" 
-          alt="BulbIcon" width={25} 
-          className="filter invert brightness-100" />
-        )}
-        </button>
-      </header>
-      
+           
         <motion.main
         key={location.key}
         initial={{ opacity: 0 }}
@@ -44,6 +26,7 @@ const Layout = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
         >
+          
             <Outlet />
         </motion.main>
         <footer></footer>

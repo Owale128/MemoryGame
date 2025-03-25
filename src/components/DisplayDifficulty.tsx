@@ -12,21 +12,21 @@ const DisplayDifficulty = ({handleDifficulty}: IDisplayDifficulty) => {
       <button
       className="w-full sm:w-2xl md:w-3xl lg:w-4xl block rounded-lg text-3xl p-5 bg-green-500 ease-in duration-150 hover:bg-green-600 cursor-pointer" 
       onClick={() => handleDifficulty('Easy')}
-      style={{color: theme.color, border: `2px solid ${theme.border}`}}
+      style={{color: theme.theme.color, border: `2px solid ${theme.theme.border}`}}
       >
         Easy
     </button>
       <button
       className="w-full sm:w-2xl md:w-3xl lg:w-4xl block border border-black rounded-lg text-3xl p-5 bg-yellow-500 my-10 ease-in duration-150 hover:bg-yellow-600 cursor-pointer"  
       onClick={() => handleDifficulty('Medium')}
-      style={{color: theme.color, border: `2px solid ${theme.border}`}}
+      style={{color: theme.theme.color, border: `2px solid ${theme.theme.border}`}}
       >
         Medium
     </button>
       <button 
       className="w-full sm:w-2xl md:w-3xl lg:w-4xl block border border-black rounded-lg text-3xl p-5 bg-red-500 ease-in duration-150 hover:bg-red-600 cursor-pointer" 
       onClick={() => handleDifficulty('Hard')}
-      style={{color: theme.color, border: `2px solid ${theme.border}`}}
+      style={{color: theme.theme.color, border: `2px solid ${theme.theme.border}`}}
       >
         Hard
     </button>

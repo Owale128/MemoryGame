@@ -76,14 +76,14 @@ const GamePage = () => {
     if(state.loading) return <Spinner />
 
   return (
-    <div className="text-center pb-14 relative">
+    <div className="text-center relative">
     {!state.isGameFinished && (
-        <div className="-mt-16 absolute left-8">
+        <div className="absolute left-8 top-8 lg:left-12 lg:top-12">
         <BackBtn navigateTo="/difficulty" />
         </div>
     )}
-    <div className="flex flex-col justify-center items-center text-3xl">
-        {!state.isGameFinished && <h1 className="mb-8 mt-10 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
+    <div className="flex flex-col justify-center items-center text-3xl min-h-screen">
+        {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.theme.color}}>Attempts: {state.attempts}</h1>}
         {state.showModal && (
             <DisplayModal state={state} storedUsername={storedUsername} retryGame={retryGame} dispatch={dispatch} />
         )}

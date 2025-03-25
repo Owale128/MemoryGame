@@ -1,10 +1,9 @@
 import { createContext } from "react";
+import { ITheme } from "../model/ITheme";
 
-export interface ITheme {
-    name: string;
-    color: string;
-    border: string;
-    background: string;
+export interface IThemeContext {
+    theme: ITheme
+    toggleTheme: () => void;
 }
 
 interface IThemes {
@@ -27,4 +26,7 @@ export const themes: IThemes = {
     }
 }
 
-export const ThemeContext = createContext<ITheme>(themes.light)
+export const ThemeContext = createContext<IThemeContext>({
+    theme: themes.light,
+    toggleTheme: () => void {}
+})
