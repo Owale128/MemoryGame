@@ -10,6 +10,7 @@ import { saveScore } from "../services/cardService";
 import BackBtn from "../components/BackBtn";
 import Spinner from "../components/Spinner";
 import useNavigation from "../hooks/useNavigation";
+import DisplayScoreListModal from "../components/DisplayScoreListModal";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -21,7 +22,8 @@ const GamePage = () => {
         error: null,
         showModal: false,
         gameStarted: false,
-        isGameFinished: false
+        isGameFinished: false,
+        showScoreList: false
     })
     const { goTo } = useNavigation()
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
@@ -29,7 +31,7 @@ const GamePage = () => {
     const categoryId = parseInt(sessionStorage.getItem('categoryId') || '0')
     const category = sessionStorage.getItem('categoryName') || ''
     const cardCount = getCardCount(difficulty)
-    const theme = useContext(ThemeContext)
+    const {theme} = useContext(ThemeContext)
     
     useEffect(() => {
         const fetchData = async () => {     
@@ -76,16 +78,21 @@ const GamePage = () => {
     if(state.loading) return <Spinner />
 
   return (
-    <div className="text-center relative">
+    <div className="text-center">
     {!state.isGameFinished && (
         <div className="absolute left-8 top-8 lg:left-12 lg:top-12">
         <BackBtn navigateTo="/difficulty" />
         </div>
     )}
-    <div className="flex flex-col justify-center items-center text-3xl min-h-screen">
-        {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.theme.color}}>Attempts: {state.attempts}</h1>}
-        {state.showModal && (
+    <div className="text-3xl">
+        {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
+        {state.showModal && !state.showScoreList &&(
+            <>
             <DisplayModal state={state} storedUsername={storedUsername} retryGame={retryGame} dispatch={dispatch} />
+            </>
+        )}
+        {state.showScoreList && (
+        <DisplayScoreListModal dispatch={dispatch} />
         )}
         {!state.showModal && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />

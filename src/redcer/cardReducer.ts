@@ -16,6 +16,7 @@ export enum ActionType {
   setMemory,
   setError,
   setShowModal,
+  setShowScoreList,
   setGameStarted,
   setIsGameFinished,
 }
@@ -63,6 +64,10 @@ export const cardReducer = (state: IState, action: IAction) => {
 
     case ActionType.setIsGameFinished:
       return { ...state, isGameFinished: action.payload as boolean };
+
+      case ActionType.setShowScoreList:
+        return {...state, showScoreList: action.payload as boolean}
+        
     default:
       return state;
   }

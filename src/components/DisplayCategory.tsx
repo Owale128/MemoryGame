@@ -9,7 +9,7 @@ interface IDisplayCategory {
 }
 
 const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
-  const theme = useContext(ThemeContext)
+  const {theme} = useContext(ThemeContext)
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-14">
     {categories.map((c) =>(
@@ -19,7 +19,7 @@ const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
             src={`${BASE_URL}${c.imgUrl}`} 
             alt={c.name}
             className="cursor-pointer h-12/12 rounded-2xl transition-all duration-300 transform hover:scale-110"
-            style={{border: `2px solid ${theme.theme.border}`}}
+            style={{border: `2px solid ${theme.border}`}}
             />
         </div>
     ))}

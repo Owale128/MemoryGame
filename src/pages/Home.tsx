@@ -18,9 +18,9 @@ const Home = () => {
     }
 
   return (
-    <div className="relative">
+    <div className="">
       <button 
-      className="flex flex-col items-center justify-end text-lg cursor-pointer absolute right-10 top-10"
+      className="flex flex-col items-center justify-end text-lg absolute right-10 top-10 cursor-pointer"
       style={{color: theme.border}}
       onClick={toggleTheme}>
         Theme

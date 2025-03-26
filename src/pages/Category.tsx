@@ -11,7 +11,7 @@ const Category = () => {
     const [categories, setCategories] = useState<ICategory[]>([])
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(true)
-    const theme = useContext(ThemeContext)
+    const {theme} = useContext(ThemeContext)
     const { goTo } = useNavigation()
 
     useEffect(() => {
@@ -47,12 +47,12 @@ const Category = () => {
         }
         
   return (
-    <div className="relative">
-        <div className="flex justify-center absolute top-8 left-8 md:left-12 md:top-12">
+    <div>
+        <div className="absolute top-8 left-8 md:left-12 md:top-12">
         <QuitBtn navigateTo="/" />
         </div>
         <div className="flex flex-col justify-center items-center min-h-screen">
-      <h1 style={{color: theme.theme.color}} className="text-center text-4xl mt-28 md:mt-0 md:mb-4">Select Category</h1>
+      <h1 style={{color: theme.color}} className="text-center text-4xl mt-28 md:mt-0 md:mb-4">Select Category</h1>
         <DisplayCategory 
         categories={categories}
         handleCategory={handleCategory}

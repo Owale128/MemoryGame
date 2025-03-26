@@ -8,7 +8,7 @@ interface IBackBtn {
 
 const QuitBtn = ({navigateTo}: IBackBtn) => {
 const { goTo } = useNavigation()
-const theme = useContext(ThemeContext)
+const {theme} = useContext(ThemeContext)
 
 const quit = () => {
     const isConfirmed = confirm('Are you sure?')
@@ -22,8 +22,8 @@ const quit = () => {
   return (
     <button
     onClick={quit}
-    className="text-2xl rounded-xl px-2 bg-red-700 text-white hover:bg-white ease-in duration-150 hover:text-black cursor-pointer"
-    style={{border: `1px solid ${theme.theme.border}`}}
+    className="text-2xl rounded-xl px-2 bg-red-700 text-white hover:bg-white hover:text-black ease-in duration-150 cursor-pointer"
+    style={{border: `1px solid ${theme.border}`}}
   >
       Quit 
     </button>
