@@ -3,14 +3,14 @@ import DisplayMemoryCards from "../components/DisplayMemoryCards";
 import { ActionType, cardReducer } from "../redcer/cardReducer";
 import { handleCardClick } from "../utils/handleCardClick";
 import { getCardCount } from "../utils/getCardCount";
-import DisplayModal from "../components/DisplayModal";
 import { fetchAndShuffleCards } from "../utils/gameUtils";
 import { ThemeContext } from "../context/ThemeContext";
 import { saveScore } from "../services/cardService";
 import BackBtn from "../components/BackBtn";
 import Spinner from "../components/Spinner";
 import useNavigation from "../hooks/useNavigation";
-import DisplayScoreListModal from "../components/DisplayScoreListModal";
+import DisplayResult from "../components/DisplayResult";
+import DisplayScoreList from "../components/DisplayScoreList";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -20,7 +20,7 @@ const GamePage = () => {
         loading: true,
         memory: [],
         error: null,
-        showModal: false,
+        showResult: false,
         gameStarted: false,
         isGameFinished: false,
         showScoreList: false
@@ -52,7 +52,7 @@ const GamePage = () => {
     useEffect(() => {
         if(state.gameStarted && finishedGame) {
             setTimeout(async () => {
-                dispatch({type: ActionType.setShowModal, payload: true})
+                dispatch({type: ActionType.setShowResult, payload: true})
                     try {
                         await saveScore(storedUsername, state.attempts, difficulty, category)
                         console.log('Score sent to backend successfully')
@@ -65,7 +65,7 @@ const GamePage = () => {
     }, [state.gameStarted, finishedGame])
 
     const retryGame = () => {
-       dispatch({type: ActionType.setShowModal, payload: false})
+       dispatch({type: ActionType.setShowResult, payload: false})
         dispatch({type: ActionType.setIsGameFinished, payload: false})
         dispatch({type: ActionType.setLoading, payload: true})
         setTimeout(() => {   
@@ -86,15 +86,15 @@ const GamePage = () => {
     )}
     <div className="text-3xl">
         {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
-        {state.showModal && !state.showScoreList &&(
+        {state.showResult && !state.showScoreList &&(
             <>
-            <DisplayModal state={state} storedUsername={storedUsername} retryGame={retryGame} dispatch={dispatch} />
+            <DisplayResult state={state} storedUsername={storedUsername} retryGame={retryGame} dispatch={dispatch} />
             </>
         )}
         {state.showScoreList && (
-        <DisplayScoreListModal dispatch={dispatch} />
+        <DisplayScoreList dispatch={dispatch} />
         )}
-        {!state.showModal && (
+        {!state.showResult && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
         )}
     </div>

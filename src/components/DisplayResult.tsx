@@ -5,29 +5,29 @@ import { ThemeContext } from "../context/ThemeContext";
 import useNavigation from "../hooks/useNavigation";
 import { ActionType, IAction } from "../redcer/cardReducer";
 
-interface IDisplayModal {
+interface IDisplayResult {
     state: {attempts: number}
     storedUsername: string;
     retryGame: () => void;
     dispatch: Dispatch<IAction>
 }
 
-const DisplayModal = ({state, storedUsername, retryGame, dispatch}: IDisplayModal) => {
+const DisplayResult = ({state, storedUsername, retryGame, dispatch}: IDisplayResult) => {
     const { goTo } = useNavigation()
     const {theme }= useContext(ThemeContext)
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
 
     const changeDifficulty = () => {
-       dispatch({type: ActionType.setShowModal, payload: false})
+       dispatch({type: ActionType.setShowResult, payload: false})
         goTo('/difficulty')
       }
 
     const changeCategory = () => {
-        dispatch({type: ActionType.setShowModal, payload: false})
+        dispatch({type: ActionType.setShowResult, payload: false})
         goTo('/categories')
       }
     const showScoreList = () => {
-        dispatch({type: ActionType.setShowModal, payload: false})
+        dispatch({type: ActionType.setShowResult, payload: false})
         dispatch({type: ActionType.setShowScoreList, payload: true})
       }
 
@@ -89,4 +89,4 @@ const DisplayModal = ({state, storedUsername, retryGame, dispatch}: IDisplayModa
   )
 }
 
-export default DisplayModal
+export default DisplayResult

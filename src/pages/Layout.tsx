@@ -5,9 +5,9 @@ import { motion } from "framer-motion"
 import { ITheme } from "../model/ITheme"
 
 const Layout = () => {
-  const savedTheme = localStorage.getItem('theme')
-  const [theme, setTheme] = useState<ITheme>(savedTheme ? JSON.parse(savedTheme) : themes.light)
-  const location = useLocation()
+    const savedTheme = localStorage.getItem('theme')
+    const [theme, setTheme] = useState<ITheme>(savedTheme ? JSON.parse(savedTheme) : themes.light)
+    const location = useLocation()
   
     const toggleTheme = () => {
     const newTheme = theme.name === themes.dark.name ? themes.light : themes.dark
@@ -29,7 +29,6 @@ const Layout = () => {
           
             <Outlet />
         </motion.main>
-        <footer></footer>
       </div>
     </ThemeContext.Provider>
   )
