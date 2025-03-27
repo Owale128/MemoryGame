@@ -9,8 +9,8 @@ import { saveScore } from "../services/cardService";
 import BackBtn from "../components/BackBtn";
 import Spinner from "../components/Spinner";
 import useNavigation from "../hooks/useNavigation";
-import DisplayResult from "../components/DisplayResult";
 import DisplayScoreList from "../components/DisplayScoreList";
+import Results from "./Results";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -88,7 +88,7 @@ const GamePage = () => {
         {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
         {state.showResult && (
             <>
-            <DisplayResult state={state} storedUsername={storedUsername} retryGame={retryGame} dispatch={dispatch} />
+            <Results state={state} retryGame={retryGame} dispatch={dispatch} />
             </>
         )}
         {state.showScoreList && (

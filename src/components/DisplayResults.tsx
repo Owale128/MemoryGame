@@ -1,37 +1,21 @@
 import { motion } from "framer-motion"
 import QuitBtn from "./QuitBtn";
-import { Dispatch, useContext } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import useNavigation from "../hooks/useNavigation";
-import { ActionType, IAction } from "../redcer/cardReducer";
 
-interface IDisplayResult {
-    state: {attempts: number}
-    storedUsername: string;
+interface IDisplayResults {
+    state: {attempts: number};
     retryGame: () => void;
-    dispatch: Dispatch<IAction>
+    changeDifficulty: () => void;
+    changeCategory: () => void;
+    showScoreList: () => void;
 }
 
-const DisplayResult = ({state, storedUsername, retryGame, dispatch}: IDisplayResult) => {
-    const { goTo } = useNavigation()
-    const {theme }= useContext(ThemeContext)
+const DisplayResults = ({state, retryGame, changeDifficulty, changeCategory, showScoreList}: IDisplayResults) => {
+  const {theme }= useContext(ThemeContext)
+    const storedUsername = sessionStorage.getItem('username') || 'Unknown'
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const category = sessionStorage.getItem('categoryName') || ''
-
-    const changeDifficulty = () => {
-       dispatch({type: ActionType.setShowResult, payload: false})
-        goTo('/difficulty')
-      }
-
-    const changeCategory = () => {
-        dispatch({type: ActionType.setShowResult, payload: false})
-        goTo('/categories')
-      }
-    const showScoreList = () => {
-        dispatch({type: ActionType.setShowResult, payload: false})
-        dispatch({type: ActionType.setShowScoreList, payload: true})
-      }
-
   return (
     <motion.div
         className="modal-overlay flex flex-col justify-center items-center text-center px-6 mt-10 sm:mt-0 sm:w-xl md:w-2xl: lg:w-3xl"
@@ -92,4 +76,4 @@ const DisplayResult = ({state, storedUsername, retryGame, dispatch}: IDisplayRes
   )
 }
 
-export default DisplayResult
+export default DisplayResults
