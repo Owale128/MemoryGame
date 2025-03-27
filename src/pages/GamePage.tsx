@@ -86,7 +86,7 @@ const GamePage = () => {
     )}
     <div className="text-3xl">
         {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
-        {state.showResult && !state.showScoreList &&(
+        {state.showResult && (
             <>
             <DisplayResult state={state} storedUsername={storedUsername} retryGame={retryGame} dispatch={dispatch} />
             </>
@@ -94,7 +94,7 @@ const GamePage = () => {
         {state.showScoreList && (
         <DisplayScoreList dispatch={dispatch} />
         )}
-        {!state.showResult && (
+        {!state.showResult && !state.showScoreList && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
         )}
     </div>

@@ -17,7 +17,7 @@ const Layout = () => {
     
   return (
     <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <div className="body ease-in duration-150 flex flex-col justify-center items-center min-h-screen relative" style={{backgroundColor: theme.background}}>
+      <div className="body ease-in duration-150 flex flex-col justify-center items-center relative" style={{backgroundColor: theme.background}}>
            
         <motion.main
         key={location.key}

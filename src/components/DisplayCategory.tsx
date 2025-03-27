@@ -18,7 +18,7 @@ const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
             <img 
             src={`${BASE_URL}${c.imgUrl}`} 
             alt={c.name}
-            className="cursor-pointer h-12/12 rounded-2xl transition-all duration-300 transform hover:scale-110"
+            className="cursor-pointer h-full rounded-2xl transition-all duration-300 transform hover:scale-110"
             style={{border: `2px solid ${theme.border}`}}
             />
         </div>

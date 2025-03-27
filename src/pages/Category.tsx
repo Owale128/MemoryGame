@@ -19,6 +19,7 @@ const Category = () => {
         try {
                 const fetchedCategories = await getCategories()
                 setCategories(fetchedCategories)
+                sessionStorage.setItem('categories', JSON.stringify(fetchedCategories))
                 setLoading(false)
             } catch (error) {
                 console.error('Failed to load categories')

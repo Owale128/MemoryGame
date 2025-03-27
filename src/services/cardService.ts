@@ -1,5 +1,6 @@
 import { ICategory } from "../model/ICategory"
 import { IGamePage } from "../model/IGamePage"
+import { ISaveScoreData } from "../model/ISaveScoreData"
 import { BASE_URL } from "../utils/baseUrl"
 import { get, put } from "./serviceBase"
 
@@ -21,3 +22,10 @@ export const saveScore = async (username: string, attempts: number, difficulty: 
     const response = await put(url, data)
     return response.data
 }
+
+export const getScoreList = async (): Promise<ISaveScoreData[]> => {
+    const url = `${BASE_URL}/getScoreList`
+    const response = await get<ISaveScoreData[]>(url)
+    return response.data
+}
+
