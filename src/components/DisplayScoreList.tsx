@@ -1,58 +1,20 @@
-import { Dispatch, useContext, useEffect, useState } from "react"
-import { ActionType, IAction } from "../redcer/cardReducer"
-import { ThemeContext } from "../context/ThemeContext"
 import { motion } from "framer-motion"
-import Spinner from "./Spinner"
-import { getScoreList } from "../services/cardService"
-import { ISaveScoreData } from "../model/ISaveScoreData"
-import { ICategory } from "../model/ICategory"
+import { useContext } from "react"
+import { ThemeContext } from "../context/ThemeContext"
+import { ISaveScoreData } from "../model/ISaveScoreData";
+
 
 interface IDisplayScoreList {
-    dispatch: Dispatch<IAction>
+   backToModal: () => void;
+   groupedScores: {
+    category: string;
+    scores: ISaveScoreData[]
+   }[]
 }
 
-const DisplayScoreList = ({dispatch}: IDisplayScoreList) => {
-    const { theme } = useContext(ThemeContext)
-    const [categories, setCategories] = useState<ICategory[]>([])
-    const [scoreList, setScoreList] = useState<ISaveScoreData[]>([])
-    const [loading, setLoading] = useState(true)
-
-    const currentUser = sessionStorage.getItem('username')
-
-    useEffect(() => {
-      const storedCategories = sessionStorage.getItem('categories')
-      if(storedCategories) {
-        setCategories(JSON.parse(storedCategories))
-      } else {
-        console.error('Categories not found in sessionStorage')
-      }
-    }, [])
-
-    useEffect(() => {
-      const fetchScoreList = async () => {
-        try {
-             const data = await getScoreList()
-              setScoreList(data)
-        } catch (error) {
-          console.error('Error fetching score list:', error)
-        } finally {
-          setLoading(false)
-        }
-      }
-      fetchScoreList()
-    }, [])
-
-    const backToModal = () => {
-      dispatch({type: ActionType.setShowResult, payload: true})
-      dispatch({type: ActionType.setShowScoreList, payload: false})
-    }
-
-      const groupedScores = categories.map((category) =>({
-          category: category.name,
-          scores: scoreList.filter((score) => score.category === category.name)
-      }))
-
-        if(loading) return <Spinner />
+const DisplayScoreList = ({backToModal, groupedScores}: IDisplayScoreList) => {
+  const { theme } = useContext(ThemeContext)
+  const currentUser = sessionStorage.getItem('username')
 
   return (
     <motion.div

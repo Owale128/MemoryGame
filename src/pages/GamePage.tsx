@@ -9,8 +9,8 @@ import { saveScore } from "../services/cardService";
 import BackBtn from "../components/BackBtn";
 import Spinner from "../components/Spinner";
 import useNavigation from "../hooks/useNavigation";
-import DisplayScoreList from "../components/DisplayScoreList";
 import Results from "./Results";
+import ScoreList from "./ScoreList";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -92,7 +92,7 @@ const GamePage = () => {
             </>
         )}
         {state.showScoreList && (
-        <DisplayScoreList dispatch={dispatch} />
+        <ScoreList dispatch={dispatch} />
         )}
         {!state.showResult && !state.showScoreList && (
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
