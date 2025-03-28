@@ -94,7 +94,7 @@ const GamePage = () => {
         </div>
     )}
     <div className="text-3xl landscape:my-20">
-        {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
+        {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100 font-mono" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
         {state.showResult && (
             <>
             <Results retryGame={retryGame} dispatch={dispatch} />

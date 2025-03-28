@@ -36,7 +36,7 @@ const Home = () => {
       )}
       </button>
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <h1 className="text-center text-3xl mb-6 ease-in duration-100 " style={{color: theme.color}}>Welcome to Memory Game!</h1>
+      <h1 className="font-mono text-center text-3xl mb-6 ease-in duration-100" style={{color: theme.color}}>Welcome to Memory Game!</h1>
       <DisplayHomeForm 
       username={username}
       setUsername={setUsername} 

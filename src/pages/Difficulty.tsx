@@ -21,7 +21,7 @@ const Difficulty = () => {
       <div className="absolute left-10 top-8 sm:left-12 sm:top-12">
     <BackBtn navigateTo='/categories' />
       </div>
-    <div className="w-screen landscape:my-22">
+    <div className="w-screen font-mono landscape:my-22">
       <h1 className="text-3xl mb-4 ease-in duration-100 " style={{color: theme.color}}>Choose Difficulty</h1>
       <DisplayDifficulty handleDifficulty={handleDifficulty} />
     </div>
