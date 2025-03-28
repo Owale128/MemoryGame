@@ -16,10 +16,10 @@ export const fetchAndShuffleCards = async (
             dispatch({type: ActionType.setGameStarted, payload: true})
         } catch (error) {
             console.error('Error fetching data:', error)
+            dispatch({type: ActionType.setError, payload: 'An error occurred while fetching cards' })
         } finally {
             setTimeout(() => {
                 dispatch({type: ActionType.setLoading, payload: false })
-                dispatch({type: ActionType.setError, payload: 'An error occurred while fetching cards'})
             }, 1600);
         }
     }

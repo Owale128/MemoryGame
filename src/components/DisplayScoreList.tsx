@@ -39,7 +39,7 @@ const DisplayScoreList = ({backToModal, groupedScores}: IDisplayScoreList) => {
       transition={{ duration: 0.8 }}
       >
       <h1 className="text-center mt-20 text-3xl md:text-4xl lg:mt-10 ease-in duration-100" style={{color: theme.color}}>Score List</h1>
-      <div className="min-h-200 w-screen p-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:min-h-160 lg:p-10">
+      <div className="min-h-200 w-screen p-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:min-h-160 lg:p-14">
       {groupedScores.map((group, index) => (
         <div
         className="rounded-2xl m-2 p-4 bg-gray-400 cursor-pointer"
@@ -49,8 +49,8 @@ const DisplayScoreList = ({backToModal, groupedScores}: IDisplayScoreList) => {
           <ul>
           <h2 className="underline w-full mb-4 sm:mb-6 text-black">{group.category}</h2>
           {group.scores.map((score, idx) => (
-            <li key={idx} style={{color: score.username === currentUser ? 'darkgreen' : 'black'}} className="mb-2 md:mb-4">
-              <span className="text-lg sm:text-xl md:text-2xl">{score.username} - {score.attempts} - {score.difficulty}</span>
+            <li key={idx} style={{color: score.username === currentUser ? 'darkgreen' : 'black'}} className=" md:mb-4">
+              <span className="text-lg sm:text-xl md:text-2xl">{score.username} <br/> Attempts: {score.attempts} <br/> Score: {score.difficulty}</span>
               <hr className="text-white" />
             </li>
           ))}

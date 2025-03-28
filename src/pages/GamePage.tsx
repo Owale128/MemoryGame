@@ -11,6 +11,7 @@ import Spinner from "../components/Spinner";
 import useNavigation from "../hooks/useNavigation";
 import Results from "./Results";
 import ScoreList from "./ScoreList";
+import NotFound from "../components/NotFound";
 
 const GamePage = () => {
     const [state, dispatch] = useReducer(cardReducer, {
@@ -76,6 +77,14 @@ const GamePage = () => {
       }
 
     if(state.loading) return <Spinner />
+    if(state.error) {
+    return (
+        <div className="text-center">
+            <NotFound errorTxt={state.error}/>
+            <BackBtn navigateTo="/difficulty" />
+        </div>
+    )
+    }
 
   return (
     <div className="text-center">
@@ -84,11 +93,11 @@ const GamePage = () => {
         <BackBtn navigateTo="/difficulty" />
         </div>
     )}
-    <div className="text-3xl">
+    <div className="text-3xl landscape:my-20">
         {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
         {state.showResult && (
             <>
-            <Results state={state} retryGame={retryGame} dispatch={dispatch} />
+            <Results retryGame={retryGame} dispatch={dispatch} />
             </>
         )}
         {state.showScoreList && (

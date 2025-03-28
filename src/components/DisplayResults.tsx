@@ -4,21 +4,19 @@ import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 interface IDisplayResults {
-    state: {attempts: number};
     retryGame: () => void;
     changeDifficulty: () => void;
     changeCategory: () => void;
     showScoreList: () => void;
 }
 
-const DisplayResults = ({state, retryGame, changeDifficulty, changeCategory, showScoreList}: IDisplayResults) => {
+const DisplayResults = ({retryGame, changeDifficulty, changeCategory, showScoreList}: IDisplayResults) => {
   const {theme }= useContext(ThemeContext)
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
-    const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
-    const category = sessionStorage.getItem('categoryName') || ''
+
   return (
     <motion.div
-        className="modal-overlay flex flex-col justify-center items-center text-center px-6 mt-10 sm:mt-0 sm:w-xl md:w-2xl: lg:w-3xl"
+        className="modal-overlay text-center px-6  sm:mt-0 sm:w-xl md:w-2xl: lg:w-3xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -33,9 +31,7 @@ const DisplayResults = ({state, retryGame, changeDifficulty, changeCategory, sho
     >
         <h1 style={{color: theme.color}} className="text-3xl mb-4 ease-in duration-100">Congratulations {storedUsername}</h1>
         <p style={{color: theme.color}} className="text-2xl mb-10 ease-in duration-100">You finished the game!</p>
-        <h2 className="mb-6 ease-in duration-100" style={{color: theme.color}}>Category: {category}</h2>
-        <h3 className="mb-6 ease-in duration-100" style={{color: theme.color}}>Level of difficulty: {difficulty}</h3>
-        <h4 className="mb-16 ease-in duration-100" style={{color: theme.color}}>Attempts: {state.attempts}</h4>
+
 
         <button 
         className="w-full border rounded-xl text-3xl p-3 bg-green-500  hover:bg-white ease-in duration-150 cursor-pointer"

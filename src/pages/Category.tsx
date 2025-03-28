@@ -6,6 +6,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import QuitBtn from "../components/QuitBtn";
 import { getCategories } from "../services/cardService";
 import useNavigation from "../hooks/useNavigation";
+import NotFound from "../components/NotFound";
 
 const Category = () => {
     const [categories, setCategories] = useState<ICategory[]>([])
@@ -24,7 +25,7 @@ const Category = () => {
             } catch (error) {
                 console.error('Failed to load categories')
                 setLoading(false)
-                setError('Something went wrong while loading categories')
+                setError('An error occurred while fetching categories')
             }
         }
         fetchCategories()
@@ -40,8 +41,8 @@ const Category = () => {
 
         if(error) {
             return(
-                <div className="flex flex-col justify-center items-center mt-52">
-                    <p className="text-red-500 text-4xl mb-10">{error}</p>
+                <div className="text-center">
+                    <NotFound errorTxt={error} />
                     <QuitBtn navigateTo="/" />
                 </div>
             )
@@ -52,8 +53,8 @@ const Category = () => {
         <div className="absolute top-8 left-8 md:left-12 md:top-12">
         <QuitBtn navigateTo="/" />
         </div>
-        <div className="flex flex-col justify-center items-center min-h-screen">
-      <h1 style={{color: theme.color}} className="text-center text-4xl mt-28 md:mt-0 md:mb-4">Select Category</h1>
+        <div className="landscape:my-22">
+      <h1 style={{color: theme.color}} className="text-center text-3xl mt-28 md:mt-0 lg:text-4xl">Select Category</h1>
         <DisplayCategory 
         categories={categories}
         handleCategory={handleCategory}

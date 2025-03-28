@@ -4,12 +4,11 @@ import { ActionType, IAction } from "../redcer/cardReducer";
 import DisplayResults from "../components/DisplayResults";
 
 interface IResults {
-    state: {attempts: number}
     retryGame: () => void;
     dispatch: Dispatch<IAction>
 }
 
-const Results = ({state, retryGame, dispatch}: IResults) => {
+const Results = ({ retryGame, dispatch}: IResults) => {
     const { goTo } = useNavigation()
 
     const changeDifficulty = () => {
@@ -29,7 +28,6 @@ const Results = ({state, retryGame, dispatch}: IResults) => {
     <div>
 
     <DisplayResults 
-    state={state} 
      retryGame={retryGame}
      changeDifficulty={changeDifficulty}
      changeCategory={changeCategory}

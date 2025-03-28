@@ -12,11 +12,8 @@ interface IDisplaymemoryCards {
 const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
     const {theme} = useContext(ThemeContext)
   return (
-    <div className="gap-4 mb-8 w-sm grid grid-cols-2 sm:grid-cols-3 sm:w-xl sm:mb-0 md:grid-cols-3 md:w-3xl md:p-4 lg:grid-cols-4 lg:w-4xl lg:p-0">
-        {state.memory.length === 0 ? (
-            <p className="col-span-full mt-10 ease-in duration-100" style={{color: theme.color}}>No Characters Found</p>
-        ) : (
-            state.memory.map((c, index) => (
+    <div className="gap-4 mb-8 w-sm p-6 grid grid-cols-2 sm:grid-cols-3 sm:w-xl sm:mb-0 md:grid-cols-3 md:w-2xl md:p-4 lg:grid-cols-4 lg:p-4 landscape:w-3xl">
+        {state.memory.map((c, index) => (
                 <motion.div 
                 key={`${c.id} - ${index}`}
                 onClick={() => handleCardClick(c.id)}
@@ -39,7 +36,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                     )}
                 </motion.div>
             ))
-        )}
+        }
 </div>
   )
 }

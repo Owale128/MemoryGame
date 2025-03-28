@@ -5,6 +5,8 @@ import { ISaveScoreData } from "../model/ISaveScoreData"
 import { ICategory } from "../model/ICategory"
 import Spinner from "../components/Spinner"
 import DisplayScoreList from "../components/DisplayScoreList"
+import NotFound from "../components/NotFound"
+import BackBtn from "../components/BackBtn"
 
 interface IDisplayScoreList {
     dispatch: Dispatch<IAction>
@@ -14,6 +16,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
     const [categories, setCategories] = useState<ICategory[]>([])
     const [scoreList, setScoreList] = useState<ISaveScoreData[]>([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
       const storedCategories = sessionStorage.getItem('categories')
@@ -31,6 +34,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
               setScoreList(data)
         } catch (error) {
           console.error('Error fetching score list:', error)
+          setError('An error occurred while fetching score list')
         } finally {
           setLoading(false)
         }
@@ -45,10 +49,18 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
 
       const groupedScores = categories.map((category) =>({
           category: category.name,
-          scores: scoreList.filter((score) => score.category === category.name)
+          scores: scoreList.filter((score) => score.category === category.name).slice(0, 5)
       }))
 
         if(loading) return <Spinner />
+        if(error) {
+            return(
+            <>
+                <NotFound errorTxt={error}/>
+                <BackBtn navigateTo="/" />
+            </>
+          )
+        }
   return (
     <div>
       <DisplayScoreList 
