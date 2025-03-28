@@ -29,6 +29,6 @@ export const router = createBrowserRouter([
             element: <GamePage />
         },
        ],
-       errorElement: <NotFound />
+       errorElement: <NotFound errorTxt={""} />
     }
 ])
