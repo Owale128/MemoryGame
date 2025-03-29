@@ -18,7 +18,7 @@ const Home = () => {
     }
 
   return (
-    <div className="">
+    <div>
       <button 
       className="flex flex-col items-center justify-end text-lg absolute right-10 top-10 cursor-pointer"
       style={{color: theme.border}}
