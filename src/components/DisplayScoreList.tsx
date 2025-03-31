@@ -3,7 +3,6 @@ import { useContext } from "react"
 import { ThemeContext } from "../context/ThemeContext"
 import { ISaveScoreData } from "../model/ISaveScoreData";
 
-
 interface IDisplayScoreList {
    backToModal: () => void;
    groupedScores: {

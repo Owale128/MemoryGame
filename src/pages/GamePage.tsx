@@ -83,7 +83,7 @@ const GamePage = () => {
             <NotFound errorTxt={state.error}/>
             <BackBtn navigateTo="/difficulty" />
         </div>
-    )
+        )
     }
 
   return (
