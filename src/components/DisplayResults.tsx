@@ -32,7 +32,6 @@ const DisplayResults = ({retryGame, changeDifficulty, changeCategory, showScoreL
         <h1 style={{color: theme.color}} className="font-mono text-3xl mb-4 ease-in duration-100">Congratulations {storedUsername}</h1>
         <p style={{color: theme.color}} className="font-mono text-2xl mb-10 ease-in duration-100">You finished the game!</p>
 
-
         <button 
         className="w-full border rounded-xl text-3xl p-3 bg-green-500  hover:bg-white ease-in duration-150 cursor-pointer"
         style={{border: `2px solid ${theme.border}`}}
