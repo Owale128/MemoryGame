@@ -61,6 +61,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
             </>
           )
         }
+        
   return (
     <div>
       <DisplayScoreList 
