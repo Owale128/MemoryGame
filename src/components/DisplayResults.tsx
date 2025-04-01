@@ -16,7 +16,7 @@ const DisplayResults = ({retryGame, changeDifficulty, changeCategory, showScoreL
 
   return (
     <motion.div
-        className="modal-overlay text-center px-6 sm:mt-0 sm:w-xl md:w-2xl: lg:w-3xl"
+        className="modal-overlay text-center px-6 mt-16 sm:mt-0 sm:w-xl md:w-2xl: lg:w-3xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -29,7 +29,7 @@ const DisplayResults = ({retryGame, changeDifficulty, changeCategory, showScoreL
         exit={{ scale: 0 }}
         transition={{ duration: 0.8 }}
     >
-        <h1 style={{color: theme.color}} className="font-mono text-3xl mb-4 ease-in duration-100">Congratulations {storedUsername}</h1>
+        <h1 style={{color: theme.color}} className="font-mono text-2xl mb-4  md:text-3xl md:mt-0 ease-in duration-100">Congratulations {storedUsername}</h1>
         <p style={{color: theme.color}} className="font-mono text-2xl mb-10 ease-in duration-100">You finished the game!</p>
 
         <button 

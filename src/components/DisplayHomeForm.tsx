@@ -12,7 +12,7 @@ const DisplayHomeForm = ({handleSubmit, username, setUsername}: IDisplayHomeForm
   return (
     <form 
     onSubmit={handleSubmit} 
-    className="p-8 sm:p-16 md:p-16 rounded-2xl ease-in duration-100 landscape:p-20"
+    className="py-12 px-6 sm:p-16 md:p-16 rounded-2xl ease-in duration-100 landscape:p-20"
     style={{
       border: `0.2rem solid ${theme.border}`
     }}
