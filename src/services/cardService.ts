@@ -24,7 +24,7 @@ export const saveScore = async (username: string, attempts: number, difficulty: 
 }
 
 export const getScoreList = async (): Promise<ISaveScoreData[]> => {
-    const url = `${BASE_URL}/getScoreList`
+    const url = `${BASE_URL}/scoreList`
     const response = await get<ISaveScoreData[]>(url)
     return response.data
 }
