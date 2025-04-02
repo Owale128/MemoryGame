@@ -37,7 +37,7 @@ const DisplayScoreList = ({backToModal, groupedScores}: IDisplayScoreList) => {
       exit={{ scale: 0 }}
       transition={{ duration: 0.8 }}
       >
-      <h1 className="font-mono text-center mt-20 text-3xl md:text-4xl lg:mt-10 ease-in duration-100" style={{color: theme.color}}>Score List</h1>
+      <h1 className="font-mono text-center mt-20 text-3xl md:text-4xl lg:mt-10 ease-in duration-100" style={{color: theme.color}}>Score List (Top 5)</h1>
       <div className="min-h-200 w-screen p-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:min-h-160 lg:p-14">
       {groupedScores.map((group, index) => (
         <div
