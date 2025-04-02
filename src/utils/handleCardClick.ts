@@ -21,10 +21,11 @@ export const handleCardClick = (
         if(firstCard && secondCard && firstCard.name === secondCard.name) {
             dispatch({ type: ActionType.matchedCards, payload: firstCard.id})
             dispatch({ type: ActionType.matchedCards, payload: secondCard.id})
+            
+        } else {  
+            setTimeout(() => {
+                dispatch({ type: ActionType.resetFlippedCards})
+            }, 2000);
         }
-
-        setTimeout(() => {
-            dispatch({ type: ActionType.resetFlippedCards})
-        }, 2000);
     }
 }

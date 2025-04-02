@@ -21,7 +21,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                 style={{ border: `2px solid ${theme.border}` }}
                 initial={{rotateY: 0}}
                 animate={{rotateY: state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? 180 : 0}}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
                 >
                     {state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? (
                         <img 
