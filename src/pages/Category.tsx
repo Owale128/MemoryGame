@@ -54,7 +54,13 @@ const Category = () => {
         <QuitBtn navigateTo="/" aria-label='Quit the game' />
         </div>
         <div className="landscape:my-22">
-      <h1 style={{color: theme.color}} className="text-center font-mono text-3xl mt-28 md:mt-0 lg:text-4xl">Select Category</h1>
+      <h1 
+      style={{color: theme.color}} 
+      className="text-center font-mono text-3xl mt-28 md:mt-0 lg:text-4xl"
+      aria-label="Select Category"
+      >
+        Select Category
+      </h1>
         <DisplayCategory 
         categories={categories}
         handleCategory={handleCategory}
