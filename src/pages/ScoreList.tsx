@@ -42,7 +42,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
       fetchScoreList()
     }, [])
 
-    const backToModal = () => {
+    const backToResults = () => {
       dispatch({type: ActionType.setShowResult, payload: true})
       dispatch({type: ActionType.setShowScoreList, payload: false})
     }
@@ -57,7 +57,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
             return(
             <>
                 <NotFound errorTxt={error}/>
-                <BackBtn navigateTo="/" />
+                <BackBtn navigateTo="/" aria-label="Back to previous screen" />
             </>
           )
         }
@@ -65,8 +65,9 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
   return (
     <div>
       <DisplayScoreList 
-      backToModal={backToModal}
+      backToResults={backToResults}
       groupedScores={groupedScores}
+      aria-live="polite"
       />
     </div>
   )
