@@ -81,7 +81,7 @@ const GamePage = () => {
     return (
         <div className="text-center">
             <NotFound errorTxt={state.error}/>
-            <BackBtn navigateTo="/difficulty" />
+            <BackBtn navigateTo="/difficulty" aria-label="Back to Difficulty Selection" />
         </div>
         )
     }
@@ -90,21 +90,31 @@ const GamePage = () => {
     <div className="text-center">
     {!state.isGameFinished && (
         <div className="absolute left-8 top-8 lg:left-12 lg:top-12">
-        <BackBtn navigateTo="/difficulty" />
+        <BackBtn navigateTo="/difficulty" aria-label="Back to Difficulty Selection" />
         </div>
     )}
     <div className="text-3xl landscape:my-20">
-        {!state.isGameFinished && <h1 className="mb-8 mt-26 md:mt-0 ease-in duration-100 font-mono" style={{color: theme.color}}>Attempts: {state.attempts}</h1>}
+        {!state.isGameFinished && 
+        <h1 
+        className="mb-8 mt-26 md:mt-0 ease-in duration-100 font-mono" 
+        style={{color: theme.color}}
+        aria-live="polite"
+        >
+            Attempts: {state.attempts}
+        </h1>
+        }
         {state.showResult && (
-            <>
+            <div aria-live="polite">
             <Results retryGame={retryGame} dispatch={dispatch} />
-            </>
+            </div>
         )}
         {state.showScoreList && (
         <ScoreList dispatch={dispatch} />
         )}
         {!state.showResult && !state.showScoreList && (
+            <div aria-live="polite">
             <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
+            </div>
         )}
     </div>
     </div>

@@ -22,6 +22,9 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                 initial={{rotateY: 0}}
                 animate={{rotateY: state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? 180 : 0}}
                 transition={{ duration: 0.4 }}
+                role="button"
+                tabIndex={0}
+                aria-label={`Card with ${c.name} - Click to flip`}
                 >
                     {state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? (
                         <img 
