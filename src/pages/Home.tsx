@@ -22,16 +22,18 @@ const Home = () => {
       <button 
       className="flex flex-col items-center justify-end text-lg absolute right-10 top-10 cursor-pointer"
       style={{color: theme.border}}
-      onClick={toggleTheme}>
+      onClick={toggleTheme}
+      aria-label="Toggle theme (light/dark mode)"
+      >
         Theme
       {theme === themes.light ? (
         <img 
         src="/MoonIcon.png" 
-        alt="Moon Icon" width={25} />
+        alt="Moon icon, dark mode theme" width={25} />
       ) : (
         <img 
         src="/BulbIcon.png" 
-        alt="BulbIcon" width={25} 
+        alt="Light bulb icon, light mode theme" width={25} 
         className="filter invert brightness-100" />
       )}
       </button>
