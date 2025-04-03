@@ -25,7 +25,7 @@ const Results = ({ retryGame, dispatch}: IResults) => {
         dispatch({type: ActionType.setShowScoreList, payload: true})
       }
   return (
-    <div>
+    <div aria-live="assertive" aria-atomic="true">
 
     <DisplayResults 
      retryGame={retryGame}
