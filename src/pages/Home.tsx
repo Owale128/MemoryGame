@@ -12,7 +12,6 @@ const Home = () => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
         sessionStorage.setItem('username', username)
-        if(username.trim() === '') return alert('Please enter username')
         setUsername('')
         goTo('/categories')
     }

@@ -1,14 +1,12 @@
 import { useContext } from "react";
-import { ICategory } from "../model/ICategory";
-import { BASE_URL } from "../utils/baseUrl";
 import { ThemeContext } from "../context/ThemeContext";
+import { categories } from "../utils/categoriesData";
 
 interface IDisplayCategory {
-    categories: ICategory[];
     handleCategory: (categoryId: number, categoryName: string) => void
 }
 
-const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
+const DisplayCategory = ({handleCategory}: IDisplayCategory) => {
   const {theme} = useContext(ThemeContext)
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-14">
@@ -22,7 +20,7 @@ const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
         aria-label={`Select category ${c.name}`}
         >
             <img 
-            src={`${BASE_URL}${c.imgUrl}`} 
+            src={`${c.imgUrl}`} 
             alt={`Category image for ${c.name}`}
             className="cursor-pointer h-full rounded-2xl transition-all duration-300 transform hover:scale-110"
             style={{border: `2px solid ${theme.border}`}}

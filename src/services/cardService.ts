@@ -1,14 +1,7 @@
-import { ICategory } from "../model/ICategory"
 import { IGamePage } from "../model/IGamePage"
 import { ISaveScoreData } from "../model/ISaveScoreData"
 import { BASE_URL } from "../utils/baseUrl"
 import { get, put } from "./serviceBase"
-
-export const getCategories = async (): Promise<ICategory[]> => {
-    const url = `${BASE_URL}/categories`
-    const response = await get<ICategory[]>(url)
-    return response.data
-}
 
 export const getCards = async (categoryId: number): Promise<IGamePage[]> => {
     const url = `${BASE_URL}/cards/${categoryId}`
