@@ -1,12 +1,14 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import DisplayCategory from "../components/DisplayCategory";
 import { ThemeContext } from "../context/ThemeContext";
 import QuitBtn from "../components/QuitBtn";
 import useNavigation from "../hooks/useNavigation";
+import Spinner from "../components/Spinner";
 
 const Category = () => {
     const {theme} = useContext(ThemeContext)
     const { goTo } = useNavigation()
+    const [loading, setloading] = useState(true)
 
     const handleCategory = (categoryId: string, categoryName: string) => {
         sessionStorage.setItem('categoryId', categoryId)
@@ -14,6 +16,17 @@ const Category = () => {
         goTo('/difficulty')
     }
         
+      useEffect(() => {
+        const fetchCategories = async () => {
+          setTimeout(() => {
+            setloading(false)
+          }, 3000);
+        }
+        fetchCategories()
+      }, [])
+
+      if(loading) return <Spinner />
+
   return (
     <div>
         <div className="absolute top-8 left-8 md:left-12 md:top-12">
