@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import { categories } from "../utils/categoriesData";
+import { categories } from "../data/categoriesData";
 
 interface IDisplayCategory {
     handleCategory: (categoryId: number, categoryName: string) => void

@@ -4,21 +4,21 @@ export const categories: ICategory[] =  [
     {
         id: 1, 
         name: 'Naruto', 
-        imgUrl: '/Naruto.png'
+        imgUrl: '/categoriesImg/Naruto.png'
     },
     {
         id: 2, 
         name: 'Pokemon', 
-        imgUrl: '/Pokemon.png'
+        imgUrl: '/categoriesImg/Pokemon.png'
     },
     {
         id: 3, 
         name: 'Dragonball', 
-        imgUrl: '/Dragonball.png'
+        imgUrl: '/categoriesImg/Dragonball.png'
     },
     {
         id: 4, 
         name: 'One Piece', 
-        imgUrl: '/OnePiece.png'
+        imgUrl: '/categoriesImg/OnePiece.png'
     }
 ]
