@@ -32,7 +32,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
         try {
              const data = await getScoreList()
               setScoreList(data)
-        } catch (error) {
+        } catch {
           setError('An error occurred while fetching score list')
         } finally {
           setLoading(false)

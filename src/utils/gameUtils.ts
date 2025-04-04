@@ -14,7 +14,7 @@ export const fetchAndShuffleCards = async (
             const duplicatedCards = shuffle(duplicateCards(memoryCards).slice(0, cardCount))
             dispatch({type: ActionType.setMemory, payload: duplicatedCards})
             dispatch({type: ActionType.setGameStarted, payload: true})
-        } catch (error) {
+        } catch {
             dispatch({type: ActionType.setError, payload: 'An error occurred while fetching cards' })
         } finally {
             setTimeout(() => {

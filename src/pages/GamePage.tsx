@@ -56,7 +56,7 @@ const GamePage = () => {
                 dispatch({type: ActionType.setShowResult, payload: true})
                     try {
                         await saveScore(storedUsername, state.attempts, difficulty, category)
-                    } catch (error) {
+                    } catch {
                         dispatch({type: ActionType.setError, payload: 'Error sending score to backend'})
                     }
                 dispatch({type: ActionType.setIsGameFinished, payload: true}) 
