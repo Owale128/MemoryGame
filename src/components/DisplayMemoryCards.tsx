@@ -2,7 +2,6 @@ import { useContext } from "react"
 import { IState } from "../model/IState"
 import { motion } from "framer-motion"
 import { ThemeContext } from "../context/ThemeContext"
-import { BASE_URL } from "../utils/baseUrl"
 
 interface IDisplaymemoryCards {
     state: IState
@@ -28,7 +27,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                 >
                     {state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? (
                         <img 
-                        src={`${BASE_URL}${c.imgUrl}`} 
+                        src={`${c.imgUrl}`} 
                         alt={c.name}
                         className=" h-44"
                         />

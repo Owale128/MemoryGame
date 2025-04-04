@@ -1,13 +1,6 @@
-import { IGamePage } from "../model/IGamePage"
 import { ISaveScoreData } from "../model/ISaveScoreData"
 import { BASE_URL } from "../utils/baseUrl"
 import { get, put } from "./serviceBase"
-
-export const getCards = async (categoryId: number): Promise<IGamePage[]> => {
-    const url = `${BASE_URL}/cards/${categoryId}`
-    const response = await get<IGamePage[]>(url)
-    return response.data
-}
 
 export const saveScore = async (username: string, attempts: number, difficulty: string, category: string) => {
     const url = `${BASE_URL}/saveScore`

@@ -1,6 +1,5 @@
-export interface IGamePage {
-    id: string;
-    name: string;
-    imgUrl: string;
+import { ICategory } from "./ICategory";
+
+export interface IGamePage extends ICategory{
     categoryId: number;
 }

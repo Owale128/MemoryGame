@@ -8,8 +8,8 @@ const Category = () => {
     const {theme} = useContext(ThemeContext)
     const { goTo } = useNavigation()
 
-    const handleCategory = (categoryId: number, categoryName: string) => {
-        sessionStorage.setItem('categoryId', categoryId.toString())
+    const handleCategory = (categoryId: string, categoryName: string) => {
+        sessionStorage.setItem('categoryId', categoryId)
         sessionStorage.setItem('categoryName', categoryName)
         goTo('/difficulty')
     }

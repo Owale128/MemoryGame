@@ -29,7 +29,7 @@ const GamePage = () => {
     const { goTo } = useNavigation()
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
     const storedUsername = sessionStorage.getItem('username') || 'Unknown'
-    const categoryId = parseInt(sessionStorage.getItem('categoryId') || '0')
+    const categoryId = sessionStorage.getItem('categoryId') || '0'
     const category = sessionStorage.getItem('categoryName') || ''
     const cardCount = getCardCount(difficulty)
     const {theme} = useContext(ThemeContext)

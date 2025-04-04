@@ -3,7 +3,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import { categories } from "../data/categoriesData";
 
 interface IDisplayCategory {
-    handleCategory: (categoryId: number, categoryName: string) => void
+    handleCategory: (categoryId: string, categoryName: string) => void
 }
 
 const DisplayCategory = ({handleCategory}: IDisplayCategory) => {
