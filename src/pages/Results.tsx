@@ -20,10 +20,12 @@ const Results = ({ retryGame, dispatch}: IResults) => {
         dispatch({type: ActionType.setShowResult, payload: false})
         goTo('/categories')
       }
+
     const showScoreList = () => {
         dispatch({type: ActionType.setShowResult, payload: false})
         dispatch({type: ActionType.setShowScoreList, payload: true})
       }
+      
   return (
     <div aria-live="assertive" aria-atomic="true">
 

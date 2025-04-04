@@ -23,7 +23,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
       if(storedCategories) {
         setCategories(JSON.parse(storedCategories))
       } else {
-        console.error('Categories not found in sessionStorage')
+        setError('Categories not found in sessionStorage')
       }
     }, [])
 
@@ -33,7 +33,6 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
              const data = await getScoreList()
               setScoreList(data)
         } catch (error) {
-          console.error('Error fetching score list:', error)
           setError('An error occurred while fetching score list')
         } finally {
           setLoading(false)

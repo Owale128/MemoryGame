@@ -14,6 +14,7 @@ const quit = () => {
     const isConfirmed = confirm('Are you sure?')
     sessionStorage.removeItem('username')
     sessionStorage.removeItem('difficulty')
+    sessionStorage.removeItem('categories')
     sessionStorage.removeItem('categoryId')
     sessionStorage.removeItem('categoryName')
     if(isConfirmed) goTo(navigateTo)
