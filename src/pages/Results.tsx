@@ -1,29 +1,24 @@
-import { Dispatch  } from "react";
 import useNavigation from "../hooks/useNavigation";
-import { ActionType, IAction } from "../redcer/cardReducer";
 import DisplayResults from "../components/DisplayResults";
 
-interface IResults {
-    retryGame: () => void;
-    dispatch: Dispatch<IAction>
-}
 
-const Results = ({ retryGame, dispatch}: IResults) => {
+const Results = () => {
     const { goTo } = useNavigation()
 
     const changeDifficulty = () => {
-       dispatch({type: ActionType.setShowResult, payload: false})
         goTo('/difficulty')
       }
 
     const changeCategory = () => {
-        dispatch({type: ActionType.setShowResult, payload: false})
         goTo('/categories')
       }
 
     const showScoreList = () => {
-        dispatch({type: ActionType.setShowResult, payload: false})
-        dispatch({type: ActionType.setShowScoreList, payload: true})
+      goTo('/scoreList')
+      }
+
+      const retryGame = () => {
+        goTo('/gamePage')
       }
       
   return (

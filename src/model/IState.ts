@@ -7,8 +7,6 @@ export interface IState {
     flippedCards: string[];
     matchedCards: string[];
     error: string | null;
-    showResult: boolean;
-    showScoreList: boolean
     gameStarted: boolean;
     isGameFinished: boolean;
 }

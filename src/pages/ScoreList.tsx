@@ -1,5 +1,4 @@
-import { Dispatch, useEffect, useState } from "react"
-import { ActionType, IAction } from "../redcer/cardReducer"
+import { useEffect, useState } from "react"
 import { getScoreList } from "../services/cardService"
 import { ISaveScoreData } from "../model/ISaveScoreData"
 import { ICategory } from "../model/ICategory"
@@ -7,16 +6,14 @@ import Spinner from "../components/Spinner"
 import DisplayScoreList from "../components/DisplayScoreList"
 import NotFound from "../components/NotFound"
 import BackBtn from "../components/BackBtn"
+import useNavigation from "../hooks/useNavigation"
 
-interface IDisplayScoreList {
-    dispatch: Dispatch<IAction>
-}
-
-const ScoreList = ({dispatch}:IDisplayScoreList) => {
+const ScoreList = () => {
     const [categories, setCategories] = useState<ICategory[]>([])
     const [scoreList, setScoreList] = useState<ISaveScoreData[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    const { goTo } = useNavigation()
 
     useEffect(() => {
       const storedCategories = sessionStorage.getItem('categories')
@@ -42,8 +39,7 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
     }, [])
 
     const backToResults = () => {
-      dispatch({type: ActionType.setShowResult, payload: true})
-      dispatch({type: ActionType.setShowScoreList, payload: false})
+      goTo('/result')
     }
 
     const groupedScores = categories.map((category) =>({

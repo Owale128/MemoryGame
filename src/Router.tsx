@@ -5,6 +5,8 @@ import Difficulty from "./pages/Difficulty";
 import GamePage from "./pages/GamePage";
 import Category from "./pages/Category";
 import NotFound from "./components/NotFound";
+import Results from "./pages/Results";
+import ScoreList from "./pages/ScoreList";
 
 export const router = createBrowserRouter([
     {
@@ -27,6 +29,14 @@ export const router = createBrowserRouter([
         {
             path: '/gamePage',
             element: <GamePage />
+        },
+        {
+            path: '/result',
+            element: <Results />
+        },
+        {
+            path: '/scoreList',
+            element: <ScoreList />
         },
        ],
        errorElement: <NotFound errorTxt={""} />

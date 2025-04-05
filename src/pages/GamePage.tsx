@@ -9,8 +9,6 @@ import { saveScore } from "../services/cardService";
 import BackBtn from "../components/BackBtn";
 import Spinner from "../components/Spinner";
 import useNavigation from "../hooks/useNavigation";
-import Results from "./Results";
-import ScoreList from "./ScoreList";
 import NotFound from "../components/NotFound";
 
 const GamePage = () => {
@@ -21,10 +19,8 @@ const GamePage = () => {
         loading: true,
         memory: [],
         error: null,
-        showResult: false,
         gameStarted: false,
         isGameFinished: false,
-        showScoreList: false
     })
     const { goTo } = useNavigation()
     const difficulty = sessionStorage.getItem('difficulty') || 'Medium'
@@ -53,7 +49,7 @@ const GamePage = () => {
     useEffect(() => {
         if(state.gameStarted && finishedGame) {
             setTimeout(async () => {
-                dispatch({type: ActionType.setShowResult, payload: true})
+                goTo('/result')
                     try {
                         await saveScore(storedUsername, state.attempts, difficulty, category)
                     } catch {
@@ -63,17 +59,6 @@ const GamePage = () => {
             }, 1600);
         }
     }, [state.gameStarted, finishedGame])
-
-    const retryGame = () => {
-       dispatch({type: ActionType.setShowResult, payload: false})
-        dispatch({type: ActionType.setIsGameFinished, payload: false})
-        dispatch({type: ActionType.setLoading, payload: true})
-        setTimeout(() => {   
-            fetchAndShuffleCards(categoryId, cardCount, dispatch)
-            dispatch({ type: ActionType.resetMatchedCards})
-        }, 1200);
-        goTo('/gamePage', {state: {difficulty: difficulty}})
-      }
 
     if(state.loading) return <Spinner />
     if(state.error) {
@@ -102,19 +87,9 @@ const GamePage = () => {
             Attempts: {state.attempts}
         </h1>
         }
-        {state.showResult && (
-            <div aria-live="polite">
-            <Results retryGame={retryGame} dispatch={dispatch} />
-            </div>
-        )}
-        {state.showScoreList && (
-        <ScoreList dispatch={dispatch} />
-        )}
-        {!state.showResult && !state.showScoreList && (
-            <div aria-live="polite">
-            <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
-            </div>
-        )}
+        <div aria-live="polite">
+        <DisplayMemoryCards handleCardClick={onCardClick} state={state} />
+        </div>
     </div>
     </div>
   )
