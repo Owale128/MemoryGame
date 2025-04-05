@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { Rings } from "react-loader-spinner"
+import { DNA } from "react-loader-spinner"
 import { ThemeContext } from "../context/ThemeContext"
 
 const Spinner = () => {
@@ -7,7 +7,7 @@ const Spinner = () => {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
       <h1 className="text-2xl" style={{color: theme.color}}>Loading..Please wait</h1>
-      <Rings color='#3498db' height={350} width={350} />
+      <DNA height={300} width={300} />
     </div>
   )
 }
