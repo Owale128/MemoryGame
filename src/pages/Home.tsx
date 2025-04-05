@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <div>
       <button 
-      className="flex flex-col items-center justify-end text-lg absolute right-10 top-10 cursor-pointer"
+      className="flex flex-col items-center justify-end text-lg absolute right-12 top-12 cursor-pointer"
       style={{color: theme.border}}
       onClick={toggleTheme}
       aria-label="Toggle theme (light/dark mode)"

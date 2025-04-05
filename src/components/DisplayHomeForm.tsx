@@ -25,7 +25,7 @@ const DisplayHomeForm = ({handleSubmit, username, setUsername}: IDisplayHomeForm
       placeholder="Enter your name"
       maxLength={12}
       onChange={(e) => setUsername(e.target.value)}
-      className="w-full text-2xl text-center border-2 border-black mb-4 p-1 ease-in duration-100 "
+      className="w-56 text-2xl text-center border-2 border-black mb-4 p-1 ease-in duration-100 sm:w-full "
       aria-label="Enter you username"
       onFocus={(e) => (e.target.style.backgroundColor = 'white')}
       onBlur={(e) => (e.target.style.backgroundColor = '')}

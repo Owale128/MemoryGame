@@ -4,7 +4,7 @@ import { ICategory } from "../model/ICategory";
 
 interface IDisplayCategory {
   categories: ICategory[]
-    handleCategory: (categoryId: string, categoryName: string) => void
+  handleCategory: (categoryId: string, categoryName: string) => void
 }
 
 const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
