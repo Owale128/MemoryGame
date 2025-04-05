@@ -20,8 +20,8 @@ const Category = () => {
     }
         
       useEffect(() => {
+        setCategories(categoriesData)
           setTimeout(() => {
-            setCategories(categoriesData)
             setloading(false)
           }, 2600);
       }, [])
