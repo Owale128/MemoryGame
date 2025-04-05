@@ -19,7 +19,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
         animate={{ scale: 1 }}
         exit={{ scale: 0.8 }}
         transition={{ duration: 0.6 }}
-        className="gap-4 mb-8 w-screen p-3 grid grid-cols-4 md:w-3xl landscape:w-3xl"
+        className="gap-1 mb-8 w-screen p-2 grid grid-cols-4 md:w-3xl md:gap-4 landscape:w-3xl"
         >
 
         {state.memory.map((c, index) => (
