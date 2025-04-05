@@ -17,10 +17,10 @@ const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
   return (
     <motion.main
     key={location.key}
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0.8 }}
+    initial={{ scale: 0.8 }}
+    animate={{ scale: 1 }}
+    exit={{ scale: 0.8 }}
+    transition={{ duration: 0.6 }}
     className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-14"
     >
 
