@@ -21,7 +21,7 @@ const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{ duration: 0.8 }}
-    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-14"
+    className="grid grid-cols-2 gap-5 p-5 md:grid-cols-3 md:p-10 lg:grid-cols-4 lg:p-10 lg:gap-10 "
     >
 
     {categories.map((c) =>(

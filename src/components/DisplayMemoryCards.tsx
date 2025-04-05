@@ -19,14 +19,14 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
         animate={{ scale: 1 }}
         exit={{ scale: 0.8 }}
         transition={{ duration: 0.6 }}
-        className="gap-4 mb-8 w-sm p-6 grid grid-cols-2 sm:grid-cols-3 sm:w-xl sm:mb-0 md:grid-cols-3 md:w-2xl md:p-4 lg:grid-cols-4 lg:p-4 landscape:w-3xl"
+        className="gap-4 mb-8 w-screen p-3 grid grid-cols-4 md:w-3xl landscape:w-3xl"
         >
 
         {state.memory.map((c, index) => (
             <motion.div 
             key={`${c.id} - ${index}`}
             onClick={() => handleCardClick(c.id)}
-            className='w-full h-48 rounded-lg shadow-2xl flex items-center justify-center cursor-pointer bg-white'
+            className='w-full h-28 rounded-lg shadow-2xl flex items-center justify-center cursor-pointer bg-white sm:h-40'
             style={{ border: `2px solid ${theme.border}` }}
             initial={{rotateY: 0}}
             animate={{rotateY: state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? 180 : 0}}
@@ -39,7 +39,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
                         <img 
                         src={`${c.imgUrl}`} 
                         alt={c.name}
-                        className=" h-44"
+                        className=" h-26 sm:h-36"
                         />
                     ) : (
                         <div className=" flex items-center justify-center w-full h-full rounded-md bg-gray-400 opacity-100">
