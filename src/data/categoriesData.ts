@@ -1,6 +1,6 @@
 import { ICategory } from "../model/ICategory";
 
-export const categories: ICategory[] =  [ 
+export const categoriesData: ICategory[] =  [ 
     {
         id: "1", 
         name: 'Naruto', 

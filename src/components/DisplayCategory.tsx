@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
-import { categories } from "../data/categoriesData";
+import { ICategory } from "../model/ICategory";
 
 interface IDisplayCategory {
+  categories: ICategory[]
     handleCategory: (categoryId: string, categoryName: string) => void
 }
 
-const DisplayCategory = ({handleCategory}: IDisplayCategory) => {
+const DisplayCategory = ({categories, handleCategory}: IDisplayCategory) => {
   const {theme} = useContext(ThemeContext)
   sessionStorage.setItem('categories', JSON.stringify (categories))
   return (

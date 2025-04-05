@@ -4,10 +4,13 @@ import { ThemeContext } from "../context/ThemeContext";
 import QuitBtn from "../components/QuitBtn";
 import useNavigation from "../hooks/useNavigation";
 import Spinner from "../components/Spinner";
+import { categoriesData } from "../data/categoriesData";
+import { ICategory } from "../model/ICategory";
 
 const Category = () => {
     const {theme} = useContext(ThemeContext)
     const { goTo } = useNavigation()
+    const [categories, setCategories] = useState<ICategory[]>([])
     const [loading, setloading] = useState(true)
 
     const handleCategory = (categoryId: string, categoryName: string) => {
@@ -17,12 +20,10 @@ const Category = () => {
     }
         
       useEffect(() => {
-        const fetchCategories = async () => {
           setTimeout(() => {
+            setCategories(categoriesData)
             setloading(false)
-          }, 3000);
-        }
-        fetchCategories()
+          }, 2600);
       }, [])
 
       if(loading) return <Spinner />
@@ -40,7 +41,8 @@ const Category = () => {
       >
         Select Category
       </h1>
-        <DisplayCategory 
+        <DisplayCategory
+        categories={categories} 
         handleCategory={handleCategory}
         />
         </div>

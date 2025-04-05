@@ -1,6 +1,6 @@
 import { IGamePage } from "../model/IGamePage";
 
-export const cards: IGamePage[] = [
+export const cardsData: IGamePage[] = [
     {
       id: "1",
       name: "Naruto Card 1",

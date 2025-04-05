@@ -46,20 +46,20 @@ const ScoreList = ({dispatch}:IDisplayScoreList) => {
       dispatch({type: ActionType.setShowScoreList, payload: false})
     }
 
-      const groupedScores = categories.map((category) =>({
-          category: category.name,
-          scores: scoreList.filter((score) => score.category === category.name).slice(0, 5)
-      }))
+    const groupedScores = categories.map((category) =>({
+        category: category.name,
+        scores: scoreList.filter((score) => score.category === category.name).slice(0, 5)
+    }))
 
-        if(loading) return <Spinner />
-        if(error) {
-            return(
-            <>
-                <NotFound errorTxt={error}/>
-                <BackBtn navigateTo="/" aria-label="Back to previous screen" />
-            </>
-          )
-        }
+      if(loading) return <Spinner />
+      if(error) {
+          return(
+          <>
+              <NotFound errorTxt={error}/>
+              <BackBtn navigateTo="/" aria-label="Back to previous screen" />
+          </>
+        )
+      }
         
   return (
     <div>
