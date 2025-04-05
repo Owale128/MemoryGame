@@ -16,20 +16,18 @@ const Layout = () => {
     }
     
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <div className="body ease-in duration-150 flex flex-col justify-center items-center relative" style={{backgroundColor: theme.background}}>
-           
+    <ThemeContext.Provider value={{theme, toggleTheme}}>  
         <motion.main
         key={location.key}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
+        className="body ease-in duration-150 flex flex-col justify-center items-center relative" 
+        style={{backgroundColor: theme.background}}
         >
-          
             <Outlet />
         </motion.main>
-      </div>
     </ThemeContext.Provider>
   )
 }

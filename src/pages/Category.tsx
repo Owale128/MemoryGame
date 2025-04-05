@@ -23,7 +23,7 @@ const Category = () => {
         setCategories(categoriesData)
           setTimeout(() => {
             setloading(false)
-          }, 2600);
+          }, 2000);
       }, [])
 
       if(loading) return <Spinner />
