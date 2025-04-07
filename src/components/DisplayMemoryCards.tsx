@@ -27,7 +27,7 @@ const DisplayMemoryCards = ({handleCardClick, state}: IDisplaymemoryCards) => {
             key={`${c.id} - ${index}`}
             onClick={() => handleCardClick(c.id)}
             className='w-full h-28 rounded-lg shadow-2xl flex items-center justify-center cursor-pointer bg-white sm:h-40'
-            style={{ border: `2px solid ${theme.border}` }}
+            style={{ border: `2px solid ${theme.border}`, backgroundColor: state.matchedCards.includes(c.id) ? 'lightgreen' : 'white' }}
             initial={{rotateY: 0}}
             animate={{rotateY: state.flippedCards.includes(c.id) || state.matchedCards.includes(c.id) ? 180 : 0}}
             transition={{ duration: 0.4 }}
