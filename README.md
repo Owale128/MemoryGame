@@ -6,4 +6,4 @@ Visit live: https://memory-game-gamma-one.vercel.app/
 ![MemoryGame](https://github.com/user-attachments/assets/24aa35f9-7871-431e-baa6-3cbd00223cee)
 
 # Stack:
-[![My Skills](https://skillicons.dev/icons?i=vite,react,ts,tailwind,nodejs,express,vercel)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=vite,react,ts,tailwind,nodejs,express,postgres,vercel)](https://skillicons.dev)
