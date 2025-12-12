@@ -14,4 +14,3 @@ export const getScoreList = async (): Promise<ISaveScoreData[]> => {
     const response = await get<ISaveScoreData[]>(url)
     return response.data
 }
-

@@ -4,8 +4,17 @@ import { ThemeContext, themes } from "../context/ThemeContext"
 import { ITheme } from "../model/ITheme"
 
 const Layout = () => {
-    const savedTheme = localStorage.getItem('theme')
-    const [theme, setTheme] = useState<ITheme>(savedTheme ? JSON.parse(savedTheme) : themes.light)
+    const getSavedTheme = () => {
+      const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null
+      if (!savedTheme) return themes.light
+      try {
+        return JSON.parse(savedTheme) as ITheme
+      } catch {
+        return themes.light
+      }
+    }
+
+    const [theme, setTheme] = useState<ITheme>(getSavedTheme())
   
     const toggleTheme = () => {
     const newTheme = theme.name === themes.dark.name ? themes.light : themes.dark
